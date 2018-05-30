@@ -1,0 +1,77 @@
+[
+  {
+    "rows": [
+      "8 - 9",
+      "9 - 10",
+      "10 - 11",
+      "11 - 12",
+      "12 - 13",
+      "13 - 14",
+      "14 - 15",
+      "15 - 16",
+      "16 - 17",
+      "17 - 18",
+      "18 - 19",
+      "19 - 20",
+      "20 - 21",
+      "21 - 22"
+    ],
+    "rawdata":[
+      {
+        "ideess": 96,
+        "nombre": "C.S.M.I. ANCON",
+        "tipo": "1",
+        "gerente": "Steve",
+        "direccion": "Mi casa",
+        "renaes": "000005814",
+        "diris_iddiris": 1,
+        "color":"#66ff66"
+      },
+      {
+        "ideess": 97,
+        "nombre": "C.S. VILLA ESTELA",
+        "tipo": "1",
+        "gerente": "Steve",
+        "direccion": "Mi casa",
+        "renaes": "000005823",
+        "diris_iddiris": 1,
+        "color":"#66ff66"
+      },
+      {
+        "ideess": 98,
+        "nombre": "P.S. SAN JOSE",
+        "tipo": "1",
+        "gerente": "Steve",
+        "direccion": "Mi casa",
+        "renaes": "000005824",
+        "diris_iddiris": 1,
+        "color":"#66ff66"
+      },
+      {
+        "ideess": 99,
+        "nombre": "P.S. VILLAS DE ANCON",
+        "tipo": "1",
+        "gerente": "Steve",
+        "direccion": "Mi casa",
+        "renaes": "000016525",
+        "diris_iddiris": 1,
+        "color":"#66ff66"
+      },
+      {
+        "ideess": 100,
+        "nombre": "C.S. RAUL PORRAS BARRENECHEA",
+        "tipo": "1",
+        "gerente": "Steve",
+        "direccion": "Mi casa",
+        "renaes": "000005734",
+        "diris_iddiris": 1,
+        "color":"#66ff66"
+      }
+    ]
+
+  }
+
+]
+
+
+
