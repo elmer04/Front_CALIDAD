@@ -1,281 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {Tab, Tabs} from 'react-bootstrap';
-import MetricTabs from './components/MetricTabs'
-import EESSList from './components/EESSList'
-import XLSX from 'xlsx';
-import { Grid,Row,Col,Button } from 'react-bootstrap'
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import {Tab, Tabs} from 'react-bootstrap'
+import XLSX from 'xlsx'
+import dataInitial from './initialState'
 import axios from 'axios'
-import SubirExcel from "./components/SubirExcel";
-import ListaPosta from "./components/ListaPosta";
+import SubirExcel from "./components/SubirExcel"
+import ListaPosta from "./components/ListaPosta"
+import RegistroMetricas from "./components/RegistroMetricas"
 
 
 class App extends Component {
   constructor(...props){
       super(...props)
       this.state = {
-          view: 1,
-          metricas:[],
-          eess:[
-                  {
-                      "ideess": 96,
-                      "nombre": "C.S.M.I. ANCON",
-                      "tipo": "1",
-                      "gerente": "Steve",
-                      "direccion": "Mi casa",
-                      "renaes": "000005814",
-                      "diris_iddiris": 1,
-                      "color":"#66ff66"
-                  },
-                  {
-                      "ideess": 97,
-                      "nombre": "C.S. VILLA ESTELA",
-                      "tipo": "1",
-                      "gerente": "Steve",
-                      "direccion": "Mi casa",
-                      "renaes": "000005823",
-                      "diris_iddiris": 1,
-                      "color":"#66ff66"
-                  },
-                  {
-                      "ideess": 98,
-                      "nombre": "P.S. SAN JOSE",
-                      "tipo": "1",
-                      "gerente": "Steve",
-                      "direccion": "Mi casa",
-                      "renaes": "000005824",
-                      "diris_iddiris": 1,
-                      "color":"#66ff66"
-                  },
-                  {
-                      "ideess": 99,
-                      "nombre": "P.S. VILLAS DE ANCON",
-                      "tipo": "1",
-                      "gerente": "Steve",
-                      "direccion": "Mi casa",
-                      "renaes": "000016525",
-                      "diris_iddiris": 1,
-                      "color":"#66ff66"
-                  },
-                  {
-                      "ideess": 100,
-                      "nombre": "C.S. RAUL PORRAS BARRENECHEA",
-                      "tipo": "1",
-                      "gerente": "Steve",
-                      "direccion": "Mi casa",
-                      "renaes": "000005734",
-                      "diris_iddiris": 1,
-                      "color":"#66ff66"
-                  }
-          ],
-          rawData:[
-          [
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                              {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              },
-                              {
-                                  id:2,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              }
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ],[
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                              {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  meta:127,
-                                  pp:105,
-                                  pct:82
-                              },
-                              {
-                                  id:2,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  meta:127,
-                                  pp:105,
-                                  pct:82
-                              }
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ],[
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                              {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              },
-                              {
-                                  id:2,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              }
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ],[
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                              {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              },
-                              {
-                                  id:2,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              }
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ],[
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                              {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  meta: 127,
-                                  mes: 105,
-                                  pct: 82
-
-                              },
-                              {
-                                  id: 2,
-                                  renaes: "000005814",
-                                  nombre: "C.S.M.I. ANCON",
-                                  meta: 127,
-                                  mes: 105,
-                                  pct: 82
-                              }
-
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ], [
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                              {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  meta:127,
-                                  mes:105,
-                                  pct:82
-                              },
-                              {
-                                  id:2,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  meta:127,
-                                  mes:105,
-                                  pct:82
-                              }
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ],[
-              {
-                  year:2017,
-                  months:[
-                      {
-                          month:1,
-                          eess:[
-                               {
-                                  id:1,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              },
-                              {
-                                  id:2,
-                                  renaes:"000005814",
-                                  nombre:"C.S.M.I. ANCON",
-                                  total:127,
-                                  sis:105,
-                                  pct:82
-                              }
-                          ]
-                      }
-                  ]
-              },{
-
-              }
-          ]]
+          //view: 1,
+          metricas:dataInitial.metricas,
+          eess: dataInitial.eess,
+          rawData: dataInitial.rawdataInitial,
+          BoxBuscar: dataInitial.BoxBuscar,
+          BoxMetricas: dataInitial.BoxMetricas,
+          BoxNiveles:  dataInitial.BoxNiveles,
+          valoresMetricas: dataInitial.valoresMetricas
       }
 
       this.parse = this.parse.bind(this);
@@ -287,7 +33,6 @@ class App extends Component {
     componentDidMount(){
       //RECUPERAR LAS METRICAS
         axios.get('http://localhost:8000/datosmetricas/metricas').then( res => {
-
             var valores=res.data.map(n => {return {
                 key: n.idindicador,
                 nombre: n.nombre
@@ -493,14 +238,19 @@ class App extends Component {
                   <img src={logo} className="App-logo" alt="logo"/>
                   <h1 className="App-title">MODULO de Administrador</h1>
               </header>
-              <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-                  <Tab eventKey={1} title="Subir Excel">
+              <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                  <Tab eventKey={1} title="Registro de métricas">
+                      <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.valoresMetricas}/>
+                  </Tab>
+                  <Tab eventKey={2} title="Subir Excel">
                       <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas} postMes={this.postMes()} parse={(this.parse)}/>
                   </Tab>
-                  <Tab eventKey={2} title="Lista de Postas">
-                      <ListaPosta eess={this.state.eess}/>
+                  <Tab eventKey={3} title="Lista de Postas">
+                      <ListaPosta eess={this.state.eess} valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.BoxMetricas} valoresButton1 ={this.state.BoxNiveles} />
                   </Tab>
+                  <Tab eventKey={4} title="Descripcion de la Posta">
 
+                  </Tab>
               </Tabs>
           </div>
       )

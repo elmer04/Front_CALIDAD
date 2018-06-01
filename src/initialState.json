@@ -1,77 +1,342 @@
-[
-  {
-    "rows": [
-      "8 - 9",
-      "9 - 10",
-      "10 - 11",
-      "11 - 12",
-      "12 - 13",
-      "13 - 14",
-      "14 - 15",
-      "15 - 16",
-      "16 - 17",
-      "17 - 18",
-      "18 - 19",
-      "19 - 20",
-      "20 - 21",
-      "21 - 22"
-    ],
-    "rawdata":[
-      {
-        "ideess": 96,
-        "nombre": "C.S.M.I. ANCON",
-        "tipo": "1",
-        "gerente": "Steve",
-        "direccion": "Mi casa",
-        "renaes": "000005814",
-        "diris_iddiris": 1,
-        "color":"#66ff66"
-      },
-      {
-        "ideess": 97,
-        "nombre": "C.S. VILLA ESTELA",
-        "tipo": "1",
-        "gerente": "Steve",
-        "direccion": "Mi casa",
-        "renaes": "000005823",
-        "diris_iddiris": 1,
-        "color":"#66ff66"
-      },
-      {
-        "ideess": 98,
-        "nombre": "P.S. SAN JOSE",
-        "tipo": "1",
-        "gerente": "Steve",
-        "direccion": "Mi casa",
-        "renaes": "000005824",
-        "diris_iddiris": 1,
-        "color":"#66ff66"
-      },
-      {
-        "ideess": 99,
-        "nombre": "P.S. VILLAS DE ANCON",
-        "tipo": "1",
-        "gerente": "Steve",
-        "direccion": "Mi casa",
-        "renaes": "000016525",
-        "diris_iddiris": 1,
-        "color":"#66ff66"
-      },
-      {
-        "ideess": 100,
-        "nombre": "C.S. RAUL PORRAS BARRENECHEA",
-        "tipo": "1",
-        "gerente": "Steve",
-        "direccion": "Mi casa",
-        "renaes": "000005734",
-        "diris_iddiris": 1,
-        "color":"#66ff66"
-      }
-    ]
 
-  }
+{
+  "metricas":[
+    {
+      "key":1,
+      "nombre":"Metrica 1"
+    },
+    {
+      "key":2,
+      "nombre":"Metrica 2"
+    },
+    {
+      "key":3,
+      "nombre":"Metrica 3"
+    },
+    {
+      "key":4,
+      "nombre":"Metrica 4"
+    },
+    {
+      "key":5,
+      "nombre":"Metrica 5"
+    }
 
-]
+  ],
+  "eess":[
+    {
+      "ideess": 96,
+      "nombre": "C.S.M.I. ANCON",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005814",
+      "diris_iddiris": 1,
+      "color":"#66ff66"
+    },
+    {
+      "ideess": 97,
+      "nombre": "C.S. VILLA ESTELA",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005823",
+      "diris_iddiris": 1,
+      "color":"#66ff66"
+    },
+    {
+      "ideess": 98,
+      "nombre": "P.S. SAN JOSE",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005824",
+      "diris_iddiris": 1,
+      "color":"#66ff66"
+    },
+    {
+      "ideess": 99,
+      "nombre": "P.S. VILLAS DE ANCON",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000016525",
+      "diris_iddiris": 1,
+      "color":"#66ff66"
+    },
+    {
+      "ideess": 100,
+      "nombre": "C.S. RAUL PORRAS BARRENECHEA",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005734",
+      "diris_iddiris": 1,
+      "color":"#66ff66"
+    }
+  ],
+  "rawdataInitial":[
+        [
+          {
+            "year":2017,
+            "months":[
+              {
+                "month":1,
+                "eess":[
+                  {
+                    "id":1,
+                    "renaes":"000005814",
+                    "nombre":"C.S.M.I. ANCON",
+                    "total":127,
+                    "sis":105,
+                    "pct":82
+                  },
+                  {
+                    "id":2,
+                    "renaes":"000005814",
+                    "nombre":"C.S.M.I. ANCON",
+                    "total":127,
+                    "sis":105,
+                    "pct":82
+                  }
+                ]
+              }
+            ]
+          },{
+
+        }
+        ],[
+        {
+          "year":2017,
+          "months":[
+            {
+              "month":1,
+              "eess":[
+                {
+                  "id":1,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "meta":127,
+                  "pp":105,
+                  "pct":82
+                },
+                {
+                  "id":2,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "meta":127,
+                  "pp":105,
+                  "pct":82
+                }
+              ]
+            }
+          ]
+        },{
+
+        }
+      ],[
+        {
+          "year":2017,
+          "months":[
+            {
+              "month":1,
+              "eess":[
+                {
+                  "id":1,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "total":127,
+                  "sis":105,
+                  "pct":82
+                },
+                {
+                  "id":2,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "total":127,
+                  "sis":105,
+                  "pct":82
+                }
+              ]
+            }
+          ]
+        },{
+
+        }
+      ],[
+        {
+          "year":2017,
+          "months":[
+            {
+              "month":1,
+              "eess":[
+                {
+                  "id":1,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "total":127,
+                  "sis":105,
+                  "pct":82
+                },
+                {
+                  "id":2,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "total":127,
+                  "sis":105,
+                  "pct":82
+                }
+              ]
+            }
+          ]
+        },{
+
+        }
+      ],[
+        {
+          "year":2017,
+          "months":[
+            {
+              "month":1,
+              "eess":[
+                {
+                  "id":1,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "meta": 127,
+                  "mes": 105,
+                  "pct": 82
+
+                },
+                {
+                  "id": 2,
+                  "renaes": "000005814",
+                  "nombre": "C.S.M.I. ANCON",
+                  "meta": 127,
+                  "mes": 105,
+                  "pct": 82
+                }
+
+              ]
+            }
+          ]
+        },{
+
+        }
+      ], [
+        {
+          "year":2017,
+          "months":[
+            {
+              "month":1,
+              "eess":[
+                {
+                  "id":1,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "meta":127,
+                  "mes":105,
+                  "pct":82
+                },
+                {
+                  "id":2,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "meta":127,
+                  "mes":105,
+                  "pct":82
+                }
+              ]
+            }
+          ]
+        },{
+
+        }
+      ],[
+        {
+          "year":2017,
+          "months":[
+            {
+              "month":1,
+              "eess":[
+                {
+                  "id":1,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "total":127,
+                  "sis":105,
+                  "pct":82
+                },
+                {
+                  "id":2,
+                  "renaes":"000005814",
+                  "nombre":"C.S.M.I. ANCON",
+                  "total":127,
+                  "sis":105,
+                  "pct":82
+                }
+              ]
+            }
+          ]
+        },{
+
+        }
+      ]
+  ],
+  "BoxBuscar":["Codigo","Nombre"],
+  "BoxMetricas":[
+    {
+    "key":1,
+    "nombre":"Metrica 1"
+    },
+    {
+      "key":2,
+      "nombre":"Metrica 2"
+    },
+    {
+      "key":3,
+      "nombre":"Metrica 3"
+    },
+    {
+      "key":4,
+      "nombre":"Metrica 4"
+    },
+    {
+      "key":5,
+      "nombre":"Metrica 5"
+    }
+  ],
+  "BoxNiveles":[
+    {
+      "nombre":"rojo",
+      "color":"#ff3300"
+    },
+    {
+      "nombre":"amarillo",
+      "color":"#ffff66"
+    },
+    {
+      "nombre":"verde",
+      "color":"#66ff66"
+    }
+  ],
+  "valoresMetricas":[
+    {
+      "idindicador":1,
+      "nombre":"metrica 1"
+    },
+    {
+      "idindicador":2,
+      "nombre":"metrica 2"
+    },
+    {
+      "idindicador":3,
+      "nombre":"metrica 3"
+    }
+  ]
+}
+
+
 
 
 
