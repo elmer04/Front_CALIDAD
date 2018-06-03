@@ -1,11 +1,12 @@
 import React from 'react';
 import EESSList from "./EESSList";
-import {BoxInput, LabelBox,LabelRadioButton} from "./ComponentesAux"
-import {Panel, form,Button} from 'react-bootstrap'
-import { Grid,Row ,Col } from 'react-bootstrap'
+import {BoxInput, LabelBox, LabelRadioButton, RadioButtons} from "./ComponentesAux"
+import {Panel,Button} from 'react-bootstrap'
+import { Grid,Row ,Col} from 'react-bootstrap'
+import './CssComponents/ListaPosta.css'
 
 
-const ListaPosta = ({eess,valoresBox1,valoresBox2,valoresButton1,...props}) =>
+const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,...props}) =>
 <Grid>
     <Panel bsStyle="primary">
         <Panel.Heading>Buscar Por : </Panel.Heading>
@@ -32,6 +33,11 @@ const ListaPosta = ({eess,valoresBox1,valoresBox2,valoresButton1,...props}) =>
         <Panel.Heading>RESULTADO </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
+                <Col mdOffset={2}>
+                    <div className="RadioButtonResultado">
+                        <RadioButtons valores={filtroResultado}/>
+                    </div>
+                </Col>
                 <EESSList eess={eess}/>
             </Row>
         </Panel.Body>

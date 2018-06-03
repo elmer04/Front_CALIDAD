@@ -1,0 +1,26 @@
+.label_Cuadritos_div_2_cuadrito{
+    width: 3em;
+    display: inline;
+}
+
+.label_Cuadritos_div_2{
+    display: inline;
+}
+
+.label_Cuadritos_div_2_separador{
+    font-size: 1.6em;
+    display: inline;
+}
+
+.div_total{
+    display: flex;
+    flex-direction: row;
+}
+
+.div_1{
+    display: inline-block;
+}
+
+.texto{
+    text-align: left;
+}

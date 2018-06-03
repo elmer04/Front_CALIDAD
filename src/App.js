@@ -8,6 +8,7 @@ import axios from 'axios'
 import SubirExcel from "./components/SubirExcel"
 import ListaPosta from "./components/ListaPosta"
 import RegistroMetricas from "./components/RegistroMetricas"
+import DescripcionPosta from "./components/DescripcionPosta";
 
 
 class App extends Component {
@@ -15,13 +16,12 @@ class App extends Component {
       super(...props)
       this.state = {
           //view: 1,
-          metricas:dataInitial.metricas,
+          metricas:dataInitial.valoresMetricas,
           eess: dataInitial.eess,
           rawData: dataInitial.rawdataInitial,
           BoxBuscar: dataInitial.BoxBuscar,
-          BoxMetricas: dataInitial.BoxMetricas,
           BoxNiveles:  dataInitial.BoxNiveles,
-          valoresMetricas: dataInitial.valoresMetricas
+          filtroResultado:dataInitial.filtroResultado
       }
 
       this.parse = this.parse.bind(this);
@@ -95,9 +95,10 @@ class App extends Component {
   parse = (XLSXObject, key) => {
       var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
       var months = []
-      months.push({
-          month:1,
-          eess:[]
+      months.push(
+          {
+              month:1,
+              eess:[]
           },{
               month:2,
               eess:[]
@@ -238,18 +239,18 @@ class App extends Component {
                   <img src={logo} className="App-logo" alt="logo"/>
                   <h1 className="App-title">MODULO de Administrador</h1>
               </header>
-              <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey={4} id="uncontrolled-tab-example">
                   <Tab eventKey={1} title="Registro de métricas">
-                      <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.valoresMetricas}/>
+                    <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}/>
                   </Tab>
                   <Tab eventKey={2} title="Subir Excel">
-                      <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas} postMes={this.postMes()} parse={(this.parse)}/>
+                    <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas} postMes={this.postMes()} parse={(this.parse)}/>
                   </Tab>
                   <Tab eventKey={3} title="Lista de Postas">
-                      <ListaPosta eess={this.state.eess} valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.BoxMetricas} valoresButton1 ={this.state.BoxNiveles} />
+                    <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado} valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas} valoresButton1 ={this.state.BoxNiveles} />
                   </Tab>
                   <Tab eventKey={4} title="Descripcion de la Posta">
-
+                    <DescripcionPosta texto={"Nombre de Posta"}/>
                   </Tab>
               </Tabs>
           </div>

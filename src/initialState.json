@@ -1,28 +1,5 @@
 
 {
-  "metricas":[
-    {
-      "key":1,
-      "nombre":"Metrica 1"
-    },
-    {
-      "key":2,
-      "nombre":"Metrica 2"
-    },
-    {
-      "key":3,
-      "nombre":"Metrica 3"
-    },
-    {
-      "key":4,
-      "nombre":"Metrica 4"
-    },
-    {
-      "key":5,
-      "nombre":"Metrica 5"
-    }
-
-  ],
   "eess":[
     {
       "ideess": 96,
@@ -284,28 +261,6 @@
       ]
   ],
   "BoxBuscar":["Codigo","Nombre"],
-  "BoxMetricas":[
-    {
-    "key":1,
-    "nombre":"Metrica 1"
-    },
-    {
-      "key":2,
-      "nombre":"Metrica 2"
-    },
-    {
-      "key":3,
-      "nombre":"Metrica 3"
-    },
-    {
-      "key":4,
-      "nombre":"Metrica 4"
-    },
-    {
-      "key":5,
-      "nombre":"Metrica 5"
-    }
-  ],
   "BoxNiveles":[
     {
       "nombre":"rojo",
@@ -318,6 +273,16 @@
     {
       "nombre":"verde",
       "color":"#66ff66"
+    }
+  ],
+  "filtroResultado":[
+    {
+      "key":"mn",
+      "nombre":"mayor-menor"
+    },
+    {
+      "key":"nm",
+      "nombre":"menor-mayor"
     }
   ],
   "valoresMetricas":[

@@ -1,73 +1,129 @@
 import React from 'react';
-import {form, FormGroup, ControlLabel, FormControl,Radio} from 'react-bootstrap'
-import {Col} from 'react-bootstrap'
-import './CssComponents/LabelBox.css'
+import {form, FormGroup, ControlLabel, FormControl,Radio,Label} from 'react-bootstrap'
+import {Col,Row} from 'react-bootstrap'
+import './CssComponents/LabelRadioButton.css'
+import './CssComponents/LabelCuadritos.css'
+import labelLabels from  './CssComponents/LabelLabels.css'
 
-import a from './CssComponents/LabelBox.css'
+import a from './CssComponents/LabelRadioButton.css'
 export const BoxInput = ({valoresBox}) =>
-    <div className="separated">
-        <FormGroup controlId="formBoxInput">
-            <Col md={2} mdOffset={2}>
-                <FormControl componentClass="select" placeholder="select">
-                    {
-                        valoresBox.map( ( valor )=>{
-                            return <option value={valor}>{valor}</option>
-                        })
-                    }
-                </FormControl>
-            </Col>
-            <Col  md={4}>
-                <FormControl type="text" placeholder="Ingrese Texto"/>
-            </Col>
-        </FormGroup>
-    </div>
+    <FormGroup controlId="formBoxInput">
+        <Col md={2} mdOffset={2}>
+            <FormControl componentClass="select" placeholder="select">
+                {
+                    valoresBox.map( ( valor )=>{
+                        return <option value={valor}>{valor}</option>
+                    })
+                }
+            </FormControl>
+        </Col>
+        <Col  md={4}>
+            <FormControl type="text" placeholder="Ingrese Texto"/>
+        </Col>
+    </FormGroup>
 
 
 
 export const LabelBox = ({texto,valoresBox}) =>
-    <div className="separated">
-        <FormGroup controlId="formLabelBox">
-            <Col md={2} mdOffset={2}>
-                <ControlLabel >{texto}</ControlLabel>
-            </Col>
-            <Col md={4}>
-                <FormControl componentClass="select" placeholder="select">
-                    {
-                        valoresBox.map( ( valor )=>{
-                            return <option value={valor.key}>{valor.nombre}</option>
-                        })
-                    }
-                </FormControl>
-            </Col>
-        </FormGroup>
-    </div>
+    <FormGroup controlId="formLabelBox">
+        <Col md={2} mdOffset={2}>
+            <ControlLabel >{texto}</ControlLabel>
+        </Col>
+        <Col md={4}>
+            <FormControl componentClass="select" placeholder="select">
+                {
+                    valoresBox.map( ( valor )=>{
+                        return <option value={valor.key}>{valor.nombre}</option>
+                    })
+                }
+            </FormControl>
+        </Col>
+    </FormGroup>
 
 export const LabelRadioButton= ({texto,valoresButton}) =>
-    <div className="separated">
-        <FormGroup controlId="formLabelRadioButton">
-            <Col md={2} mdOffset={2}>
-                <ControlLabel>{texto}</ControlLabel>
-            </Col>
-            <Col md={4}>
-                <FormGroup>
-                    {
-                        valoresButton.map((valor)=>{{
-                            return <Radio name="radioGroup" className="radios" value={valor.color} >{valor.nombre}</Radio>
-                        }})
-                    }
-                </FormGroup>
-            </Col>
-        </FormGroup>
-    </div>
+    <FormGroup controlId="formLabelRadioButton">
+        <Col md={2} mdOffset={2}>
+            <ControlLabel>{texto}</ControlLabel>
+        </Col>
+        <Col md={4}>
+            <FormGroup>
+                {
+                    valoresButton.map((valor)=>{{
+                        return <Radio name="radioGroup" className="radios" value={valor.color} >{valor.nombre}</Radio>
+                    }})
+                }
+            </FormGroup>
+        </Col>
+    </FormGroup>
 
 export const LabelTextArea = ({texto,value,disable=false})=>
-    <div>
-        <FormGroup controlId="formLabelRadioButton">
-            <Col md={2} mdOffset={2} >
-                <ControlLabel>{texto}</ControlLabel>
+    <FormGroup controlId="formLabelTextArea">
+        <Col md={2} mdOffset={2} >
+            <ControlLabel>{texto}</ControlLabel>
+        </Col>
+        <Col md={5}>
+            <FormControl componentClass="textarea"  disabled={disable} value={value} />
+        </Col>
+    </FormGroup>
+
+export const RadioButtons = ({valores}) =>
+    <FormGroup  controlId="formRadioButtons">
+        {
+            valores.map((valor)=>{
+                return <Radio name="radioGroup" value={valor.key} inline>{valor.nombre}</Radio>
+            })
+        }
+    </FormGroup>
+
+export const LabelCuadritos = ({texto,valoresCuadritos})=>
+    <FormGroup  controlId="formLabelCuadritos">
+        <Row>
+            <Col md={4} mdOffset={2} className="texto">
+                <ControlLabel >{texto}</ControlLabel>
             </Col>
-            <Col md={5}>
-                <FormControl componentClass="textarea"  disabled={disable} value={value} />
+            <Col md={6}>
+            {
+                valoresCuadritos.map((valor,index)=>{
+                    return  <div className="label_Cuadritos_div_2">
+                                <FormControl type="text" value={valor} className="label_Cuadritos_div_2_cuadrito"/>
+
+                        {
+                            (()=>{
+                                if(valoresCuadritos.length!==(index+1))
+                                    return <FormControl.Static className="label_Cuadritos_div_2_separador">-</FormControl.Static>
+
+                            })()
+                        }
+                            </div>
+
+                })
+            }
             </Col>
-        </FormGroup>
-    </div>
+        </Row>
+    </FormGroup>
+
+export const LabelText = ({texto,value="",disable=false})=>
+    <FormGroup controlId="formLabelTextArea">
+        <Col md={2} mdOffset={2} >
+            <ControlLabel>{texto}</ControlLabel>
+        </Col>
+        <Col md={5} mdOffset={2}>
+            <FormControl componentClass="text"  disabled={disable} value={value} />
+        </Col>
+    </FormGroup>
+
+export const LabelLabels = ({texto,valoresLabels})=>
+    <FormGroup  controlId="formLabelCuadritos">
+        <Row>
+            <Col md={4}>
+                <Label >{texto}</Label>
+            </Col>
+            <Col md={8} >
+                {
+                    valoresLabels.map((valor)=>{
+                        return  <Label inline>{valor}</Label>
+                    })
+                }
+            </Col>
+        </Row>
+    </FormGroup>
