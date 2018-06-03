@@ -250,7 +250,7 @@ class App extends Component {
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado} valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas} valoresButton1 ={this.state.BoxNiveles} />
                   </Tab>
                   <Tab eventKey={4} title="Descripcion de la Posta">
-                    <DescripcionPosta texto={"Nombre de Posta"}/>
+                    <DescripcionPosta texto={"Nombre de Posta"} fechaultima={["12","34","34"]}  fechaproxima={["12","34","34"]} colores={['rojo','amarillo','verde']} metricas={this.state.metricas}/>
                   </Tab>
               </Tabs>
           </div>

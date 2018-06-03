@@ -6,7 +6,7 @@ import { Grid,Row,Col } from 'react-bootstrap'
 
 import './CssComponents/DescripcionPosta.css'
 
-const DescripcionPosta = ({texto,...props}) =>
+const DescripcionPosta = ({texto,fechaultima,fechaproxima,metricas,colores,...props}) =>
     <Grid>
         <Row>
             <h1>{texto}</h1>
@@ -16,8 +16,8 @@ const DescripcionPosta = ({texto,...props}) =>
                 <Panel bsStyle="primary"  >
                     <Panel.Heading>Descripcion de Visitas</Panel.Heading>
                     <Panel.Body>
-                        <LabelCuadritos texto={"Fecha ultima"} valoresCuadritos={["12","34","34"]}/>
-                        <LabelCuadritos texto={"Fecha proxima"} valoresCuadritos={["12","34","34"]}/>
+                        <LabelCuadritos texto={"Fecha ultima"} valoresCuadritos={fechaultima}/>
+                        <LabelCuadritos texto={"Fecha proxima"} valoresCuadritos={fechaproxima}/>
                     </Panel.Body>
                 </Panel>
                 <Panel bsStyle="primary">
@@ -43,13 +43,17 @@ const DescripcionPosta = ({texto,...props}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Métricas</Panel.Heading>
                     <Panel.Body>
-                        <LabelLabels texto="metrica1" valoresLabels={["3","4","5"]}/>
+                        {
+                            metricas.map((metrica)=>
+                                <LabelLabels texto={metrica.nombre} valoresLabels={colores}/>
+                            )
+                        }
                     </Panel.Body>
                 </Panel>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Promedio Métrica</Panel.Heading>
                     <Panel.Body>
-
+                        <LabelLabels texto="Promedio" valoresLabels={colores}/>
                     </Panel.Body>
                 </Panel>
             </Col>

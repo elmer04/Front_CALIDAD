@@ -3,8 +3,9 @@ import {form, FormGroup, ControlLabel, FormControl,Radio,Label} from 'react-boot
 import {Col,Row} from 'react-bootstrap'
 import './CssComponents/LabelRadioButton.css'
 import './CssComponents/LabelCuadritos.css'
+import './CssComponents/LabelLabels.css'
 import labelLabels from  './CssComponents/LabelLabels.css'
-
+import ejemplo from './CssComponents/ejemplo'
 import a from './CssComponents/LabelRadioButton.css'
 export const BoxInput = ({valoresBox}) =>
     <FormGroup controlId="formBoxInput">
@@ -116,12 +117,15 @@ export const LabelLabels = ({texto,valoresLabels})=>
     <FormGroup  controlId="formLabelCuadritos">
         <Row>
             <Col md={4}>
-                <Label >{texto}</Label>
+                <Label className="div_label" >{texto}</Label>
             </Col>
             <Col md={8} >
                 {
                     valoresLabels.map((valor)=>{
-                        return  <Label inline>{valor}</Label>
+                        var md=12/valoresLabels.length
+                        return  <Col className="labelLabelsdiv" md={md}>
+                                    <Label className="div_labels" inline>{valor}</Label>
+                                </Col>
                     })
                 }
             </Col>
