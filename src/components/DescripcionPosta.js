@@ -3,6 +3,7 @@ import EESSList from "./EESSList";
 import {BoxInput, LabelBox, LabelCuadritos, LabelLabels, LabelRadioButton, LabelText} from "./ComponentesAux"
 import {Panel, form,Button,Label} from 'react-bootstrap'
 import { Grid,Row,Col } from 'react-bootstrap'
+import ParetoDiagram from './ParetoDiagram'
 
 import './CssComponents/DescripcionPosta.css'
 
@@ -63,7 +64,7 @@ const DescripcionPosta = ({texto,fechaultima,fechaproxima,metricas,colores,...pr
                 <Panel bsStyle="primary">
                     <Panel.Heading>Diagrama de Pareto</Panel.Heading>
                     <Panel.Body>
-
+                        <ParetoDiagram data={[5,10,1,3]} size={[400,400]} />
                     </Panel.Body>
                 </Panel>
             </Col>
