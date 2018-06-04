@@ -6,7 +6,8 @@ import { Grid,Row ,Col} from 'react-bootstrap'
 import './CssComponents/ListaPosta.css'
 
 
-const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,...props}) =>
+const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,listarOnClick,
+                        listaChange,...props}) =>
 <Grid>
     <Panel bsStyle="primary">
         <Panel.Heading>Buscar Por : </Panel.Heading>
@@ -24,8 +25,8 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
                 <LabelBox texto="Metricas" valoresBox={valoresBox2}/>
             </Row>
             <Row className="show-grid">
-                <LabelRadioButton texto="Niveles" valoresButton={valoresButton1}/>
-                <Button bsStyle="primary">Listar</Button>
+                <LabelRadioButton texto="Niveles" valoresButton={valoresButton1} changeRadio={listaChange}/>
+                <Button bsStyle="primary" onClick={listarOnClick}>Listar</Button>
             </Row>
         </Panel.Body>
     </Panel>
@@ -38,7 +39,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
                         <RadioButtons valores={filtroResultado}/>
                     </div>
                 </Col>
-                <EESSList eess={eess}/>
+                <EESSList eess={eess} colores={valoresButton1}/>
             </Row>
         </Panel.Body>
     </Panel>

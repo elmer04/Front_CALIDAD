@@ -1,5 +1,5 @@
-import React from 'react';
-import {form, FormGroup, ControlLabel, FormControl,Radio,Label} from 'react-bootstrap'
+import React from 'react'
+import {form, FormGroup, ControlLabel, FormControl,Radio,Label,Button} from 'react-bootstrap'
 import {Col,Row} from 'react-bootstrap'
 import './CssComponents/LabelRadioButton.css'
 import './CssComponents/LabelCuadritos.css'
@@ -41,31 +41,50 @@ export const LabelBox = ({texto,valoresBox}) =>
         </Col>
     </FormGroup>
 
-export const LabelRadioButton= ({texto,valoresButton}) =>
-    <FormGroup controlId="formLabelRadioButton">
+export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
+    let handleOptionChange = (changeEvent) => {
+        let valorRadio = changeEvent.target.value
+        changeRadio(valorRadio)
+    };
+
+    return (<FormGroup controlId="formLabelRadioButton">
         <Col md={2} mdOffset={2}>
             <ControlLabel>{texto}</ControlLabel>
         </Col>
         <Col md={4}>
             <FormGroup>
                 {
-                    valoresButton.map((valor)=>{{
-                        return <Radio name="radioGroup" className="radios" value={valor.color} >{valor.nombre}</Radio>
-                    }})
+                    valoresButton.map((valor) => {
+                        {
+                            return <Radio name="radioGroup" onChange={handleOptionChange}
+                                          className="radios" value={valor.nombre}>{valor.nombre}</Radio>
+                        }
+                    })
                 }
             </FormGroup>
         </Col>
-    </FormGroup>
+    </FormGroup>)
+}
 
-export const LabelTextArea = ({texto,value,disable=false})=>
-    <FormGroup controlId="formLabelTextArea">
-        <Col md={2} mdOffset={2} >
-            <ControlLabel>{texto}</ControlLabel>
-        </Col>
-        <Col md={5}>
-            <FormControl componentClass="textarea"  disabled={disable} value={value} />
-        </Col>
-    </FormGroup>
+
+export const LabelTextArea = ({texto,value,index,onChangeEditar,disable=false})=> {
+    const handleChange= (event) => {
+
+        console.log(event.target.value)
+        onChangeEditar(event.target.value,index);
+    }
+
+    return (
+        <FormGroup controlId="formLabelTextArea">
+            <Col md={2} mdOffset={2}>
+                <ControlLabel>{texto}</ControlLabel>
+            </Col>
+            <Col md={5}>
+                <FormControl componentClass="textarea" disabled={disable} value={value} onChange={handleChange} />
+            </Col>
+        </FormGroup>
+    );
+};
 
 export const RadioButtons = ({valores}) =>
     <FormGroup  controlId="formRadioButtons">
@@ -109,7 +128,7 @@ export const LabelText = ({texto,value="",disable=false})=>
             <ControlLabel>{texto}</ControlLabel>
         </Col>
         <Col md={5} mdOffset={2}>
-            <FormControl componentClass="text"  disabled={disable} value={value} />
+            <FormControl  componentClass="text"  disabled={disable} value={value} />
         </Col>
     </FormGroup>
 

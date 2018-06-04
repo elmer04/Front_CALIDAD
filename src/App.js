@@ -21,7 +21,10 @@ class App extends Component {
           rawData: dataInitial.rawdataInitial,
           BoxBuscar: dataInitial.BoxBuscar,
           BoxNiveles:  dataInitial.BoxNiveles,
-          filtroResultado:dataInitial.filtroResultado
+          filtroResultado:dataInitial.filtroResultado,
+          metricaEnable: false,
+          selectListar : '',
+
       }
 
       this.parse = this.parse.bind(this);
@@ -33,21 +36,64 @@ class App extends Component {
     componentDidMount(){
       //RECUPERAR LAS METRICAS
         axios.get('http://localhost:8000/datosmetricas/metricas').then( res => {
-            var valores=res.data.map(n => {return {
-                key: n.idindicador,
-                nombre: n.nombre
-            }});
-            this.setState( prevState => ({
-                metricas: valores
+            this.setState(prevState=> ({
+                metricas: res.data
             }))
         }).then(
-            axios.get('http://localhost:8000/eess/api').then(res =>{
+            axios.get('http://localhost:8000/eess/eessMetricaColor/1').then(res =>{
                 this.setState(prevState => ({
-                    eess: res.data,
+                    eess: res.data
                 }))
             })
         )
     }
+
+//FUNCIONE STEVE
+    //LISTA METRICA
+    enableRM = () =>{
+      if(this.state.metricaEnable){
+          axios.get('http://localhost:8000/datosmetricas/metricas').then(res => {
+              this.setState(prevState=> ({
+                  metricas: res.data,
+                  metricaEnable: !prevState.metricaEnable
+              }))}
+          )
+      }else
+            this.setState(prevState=>({
+                metricaEnable: !prevState.metricaEnable
+            }))
+    }
+
+    handleChangeRM= (texto,index) => {
+        this.setState(prevState =>{
+            console.log(texto);
+            let valor=prevState.metricas;
+            valor[index].nombre=texto;
+            return { metricas : valor}
+        })
+    }
+
+    saveChanges=()=>{
+        axios.post(`http://localhost:8000/datosmetricas/metricasUpdate`,this.state.metricas).then(
+                this.setState(prevState=>({
+                    metricaEnable: !prevState.metricaEnable
+                }))
+            )
+    }
+
+    escogerNivel=()=>{
+        axios.get(`http://localhost:8000/eess/eessMetricaColor/1/${this.state.selectListar}`).then(res =>{
+            this.setState(prevState => ({
+                eess: res.data
+            }))
+        })
+    }
+    handleColorChange = (color) => {
+        this.setState({selectListar : color})
+    }
+
+
+
 
 //CAMBIOS ALEJANDRO
   /*changeView = () => {
@@ -239,18 +285,26 @@ class App extends Component {
                   <img src={logo} className="App-logo" alt="logo"/>
                   <h1 className="App-title">MODULO de Administrador</h1>
               </header>
-              <Tabs defaultActiveKey={4} id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey={3} id="uncontrolled-tab-example">
                   <Tab eventKey={1} title="Registro de métricas">
-                    <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}/>
+                    <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}
+                                      editable={this.state.metricaEnable} onClickEditar={this.enableRM}
+                                        changeEditar={this.handleChangeRM} onClickGuardar={this.saveChanges}/>
                   </Tab>
                   <Tab eventKey={2} title="Subir Excel">
-                    <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas} postMes={this.postMes()} parse={(this.parse)}/>
+                    <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas}
+                                postMes={this.postMes} parse={(this.parse)}/>
                   </Tab>
                   <Tab eventKey={3} title="Lista de Postas">
-                    <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado} valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas} valoresButton1 ={this.state.BoxNiveles} />
+                    <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
+                                valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
+                                valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
+                                listaChange={this.handleColorChange}/>
                   </Tab>
                   <Tab eventKey={4} title="Descripcion de la Posta">
-                    <DescripcionPosta texto={"Nombre de Posta"} fechaultima={["12","34","34"]}  fechaproxima={["12","34","34"]} colores={['rojo','amarillo','verde']} metricas={this.state.metricas}/>
+                    <DescripcionPosta texto={"Nombre de Posta"} fechaultima={["12","34","34"]}
+                                      fechaproxima ={["12","34","34"]} colores={['rojo','amarillo','verde']}
+                                      metricas={this.state.metricas}/>
                   </Tab>
               </Tabs>
           </div>

@@ -9,7 +9,8 @@
       "direccion": "Mi casa",
       "renaes": "000005814",
       "diris_iddiris": 1,
-      "color":"#66ff66"
+      "color":"verde",
+      "porcentaje":67.30
     },
     {
       "ideess": 97,
@@ -19,7 +20,8 @@
       "direccion": "Mi casa",
       "renaes": "000005823",
       "diris_iddiris": 1,
-      "color":"#66ff66"
+      "color":"verde",
+      "porcentaje":67.30
     },
     {
       "ideess": 98,
@@ -29,7 +31,8 @@
       "direccion": "Mi casa",
       "renaes": "000005824",
       "diris_iddiris": 1,
-      "color":"#66ff66"
+      "color":"verde",
+      "porcentaje":67.30
     },
     {
       "ideess": 99,
@@ -39,7 +42,8 @@
       "direccion": "Mi casa",
       "renaes": "000016525",
       "diris_iddiris": 1,
-      "color":"#66ff66"
+      "color":"verde",
+      "porcentaje":67.30
     },
     {
       "ideess": 100,
@@ -49,7 +53,8 @@
       "direccion": "Mi casa",
       "renaes": "000005734",
       "diris_iddiris": 1,
-      "color":"#66ff66"
+      "color":"verde",
+      "porcentaje":67.30
     }
   ],
   "rawdataInitial":[
