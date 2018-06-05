@@ -1,7 +1,7 @@
 import React,{ Component } from 'react';
 import * as d3 from 'd3';
 import { scaleLinear,max,select } from 'd3';
-import './ParetoDiagram.css'
+import './CssComponents/ParetoDiagram.css'
 
 const dataFeik = [
     {

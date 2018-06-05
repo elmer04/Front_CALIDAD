@@ -2,6 +2,10 @@
   "name": "peves",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "5.8.0",
+    "node": "8.11.1"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "prop-types": "15.6.1",
