@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: `http://apipeves.herokuapp.com/`
+    baseURL: `https://apipeves.herokuapp.com/`
 });
