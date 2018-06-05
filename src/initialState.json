@@ -303,7 +303,35 @@
       "idindicador":3,
       "nombre":"metrica 3"
     }
-  ]
+  ],
+  "posta":{
+      "ideess": 96,
+      "nombre": "C.S.M.I. ANCON",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005814",
+      "diris_iddiris": 1,
+      "color":"verde",
+      "porcentaje":67.30,
+      "metricas":[
+        {
+          "idindicador":1,
+          "nombre":"metrica 1",
+          "color":"rojo"
+        },
+        {
+          "idindicador":2,
+          "nombre":"metrica 2",
+          "color":"verde"
+        },
+        {
+          "idindicador":3,
+          "nombre":"metrica 3",
+          "color":"amarillo"
+        }
+      ]
+    }
 }
 
 

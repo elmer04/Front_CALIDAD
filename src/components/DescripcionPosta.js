@@ -1,16 +1,16 @@
 import React from 'react';
-import EESSList from "./EESSList";
-import {BoxInput, LabelBox, LabelCuadritos, LabelLabels, LabelRadioButton, LabelText} from "./ComponentesAux"
-import {Panel, form,Button,Label} from 'react-bootstrap'
+//import EESSList from "./EESSList";
+import { LabelCuadritos, LabelLabels, LabelText} from "./ComponentesAux"
+import {Panel} from 'react-bootstrap'
 import { Grid,Row,Col } from 'react-bootstrap'
 import ParetoDiagram from './ParetoDiagram'
 
 import './CssComponents/DescripcionPosta.css'
 
-const DescripcionPosta = ({texto,fechaultima,fechaproxima,metricas,colores,...props}) =>
+const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores,...props}) =>
     <Grid>
         <Row>
-            <h1>{texto}</h1>
+            <h1>{posta.nombre}</h1>
         </Row>
         <Row>
             <Col md={6} id="Paneles">
@@ -25,11 +25,11 @@ const DescripcionPosta = ({texto,fechaultima,fechaproxima,metricas,colores,...pr
                     <Panel.Heading>Descripcion General</Panel.Heading>
                     <Panel.Body>
                         <Row>
-                            <LabelText texto={"Tipo"} />
+                            <LabelText texto={"Tipo"} value={posta.tipo} disable={true} />
                         </Row>
                         <br></br>
                         <Row>
-                            <LabelText texto={"Jefe"} />
+                            <LabelText texto={"Jefe"} value={posta.gerente} disable={true} />
                         </Row>
                     </Panel.Body>
                 </Panel>
@@ -45,9 +45,13 @@ const DescripcionPosta = ({texto,fechaultima,fechaproxima,metricas,colores,...pr
                     <Panel.Heading>Métricas</Panel.Heading>
                     <Panel.Body>
                         {
-                            metricas.map((metrica)=>
-                                <LabelLabels texto={metrica.nombre} valoresLabels={colores}/>
-                            )
+                            metricas.map((metrica)=> {
+                                let tipocolor=posta.metricas.find(metrica1 => metrica1.idindicador===metrica.idindicador)
+
+                                let color=(typeof tipocolor === 'undefined') ? '':tipocolor.color
+                                return <LabelLabels texto={metrica.nombre} color={color}
+                                                    valoresLabels={colores}/>
+                            })
                         }
                     </Panel.Body>
                 </Panel>

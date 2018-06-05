@@ -1,12 +1,12 @@
 import React from 'react'
-import {form, FormGroup, ControlLabel, FormControl,Radio,Label,Button} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl,Radio,Label} from 'react-bootstrap'
 import {Col,Row} from 'react-bootstrap'
 import './CssComponents/LabelRadioButton.css'
 import './CssComponents/LabelCuadritos.css'
 import './CssComponents/LabelLabels.css'
-import labelLabels from  './CssComponents/LabelLabels.css'
-import ejemplo from './CssComponents/ejemplo'
-import a from './CssComponents/LabelRadioButton.css'
+//import labelLabels from  './CssComponents/LabelLabels.css'
+//import ejemplo from './CssComponents/ejemplo'
+//import a from './CssComponents/LabelRadioButton.css'
 export const BoxInput = ({valoresBox,BoxChange}) =>{
     let handleOptionChange = (changeEvent) => {
         let value = changeEvent.target.value
@@ -65,10 +65,9 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
             <FormGroup>
                 {
                     valoresButton.map((valor) => {
-                        {
-                            return <Radio name="radioGroup" onChange={handleOptionChange}
+                        return <Radio name="radioGroup" onChange={handleOptionChange}
                                           className="radios" value={valor.nombre}>{valor.nombre}</Radio>
-                        }
+
                     })
                 }
             </FormGroup>
@@ -132,18 +131,20 @@ export const LabelCuadritos = ({texto,valoresCuadritos})=>
         </Row>
     </FormGroup>
 
-export const LabelText = ({texto,value="",disable=false})=>
-    <FormGroup controlId="formLabelTextArea">
+export const LabelText = ({texto,value,disable=false})=>
+    <FormGroup controlId="formLabelText">
         <Col md={2} mdOffset={2} >
             <ControlLabel>{texto}</ControlLabel>
         </Col>
         <Col md={5} mdOffset={2}>
-            <FormControl  componentClass="text"  disabled={disable} value={value} />
+            <FormControl  type="text"  disabled={disable} value={value} />
         </Col>
     </FormGroup>
 
-export const LabelLabels = ({texto,valoresLabels})=>
-    <FormGroup  controlId="formLabelCuadritos">
+export const LabelLabels = ({texto,color,valoresLabels})=>{
+    const md=12/valoresLabels.length;
+
+    return ( <FormGroup  controlId="formLabelCuadritos">
         <Row>
             <Col md={4}>
                 <Label className="div_label" >{texto}</Label>
@@ -151,12 +152,19 @@ export const LabelLabels = ({texto,valoresLabels})=>
             <Col md={8} >
                 {
                     valoresLabels.map((valor)=>{
-                        var md=12/valoresLabels.length
+
+                        if(valor.nombre===color) {
+                            return <Col className="labelLabelsdiv" md={md}>
+                                <Label className="div_labels" style={{backgroundColor: valor.color}}
+                                       inline>{valor.nombre}</Label>
+                            </Col>
+                        }else
                         return  <Col className="labelLabelsdiv" md={md}>
-                                    <Label className="div_labels" inline>{valor}</Label>
+                                    <Label className="div_labels"  inline>{valor.nombre}</Label>
                                 </Col>
                     })
                 }
             </Col>
         </Row>
-    </FormGroup>
+    </FormGroup>)
+}

@@ -26,6 +26,7 @@ class App extends Component {
           buscarPor:dataInitial.BoxBuscar[0],
           selectListar : '',
           selectMetricaListar : 1,
+          posta : dataInitial.posta,
 
       }
 
@@ -84,6 +85,8 @@ class App extends Component {
     }
 
     buscarPorClick=()=>{
+      this.setState({selectOrBuscar : 2});
+
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
                 console.log(1)
@@ -99,6 +102,7 @@ class App extends Component {
     }
 
     escogerNivel=()=>{
+        this.setState({selectOrBuscar : 1});
         api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res =>{
             this.setState(prevState => ({
                 eess: res.data
@@ -330,7 +334,7 @@ class App extends Component {
                   <img src={logo} className="App-logo" alt="logo"/>
                   <h1 className="App-title">MODULO de Administrador</h1>
               </header>
-              <Tabs defaultActiveKey={3} id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey={4} id="uncontrolled-tab-example">
                   <Tab eventKey={1} title="Registro de métricas">
                     <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}
                                       editable={this.state.metricaEnable} onClickEditar={this.enableRM}
@@ -345,12 +349,13 @@ class App extends Component {
                                 valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
                                 valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
                                 listaChange={this.handleColorChange} listaMetricaChange={this.handleMetricaChange}
-                                buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick} />
+                                buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick}
+                                />
                   </Tab>
                   <Tab eventKey={4} title="Descripcion de la Posta">
-                    <DescripcionPosta texto={"Nombre de Posta"} fechaultima={["12","34","34"]}
-                                      fechaproxima ={["12","34","34"]} colores={['rojo','amarillo','verde']}
-                                      metricas={this.state.metricas}/>
+                    <DescripcionPosta posta={this.state.posta} fechaultima={["12","34","34"]}
+                                      fechaproxima ={["12","34","34"]} colores={this.state.BoxNiveles}
+                                      metricas={this.state.metricas} />
                   </Tab>
               </Tabs>
           </div>

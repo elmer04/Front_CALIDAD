@@ -1,5 +1,5 @@
 import React from 'react';
-import { form ,Button} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import { Grid ,Row,Col} from 'react-bootstrap'
 import {LabelTextArea} from "./ComponentesAux";
 import  "./CssComponents/RegistroMetricas.css";

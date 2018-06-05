@@ -4,10 +4,12 @@ import {BoxInput, LabelBox, LabelRadioButton, RadioButtons} from "./ComponentesA
 import {Panel,Button} from 'react-bootstrap'
 import { Grid,Row ,Col} from 'react-bootstrap'
 import './CssComponents/ListaPosta.css'
+import DescripcionPosta from "./DescripcionPosta";
 
 
 const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,listarOnClick,
-                        listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,...props}) =>
+                        listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,
+                        ...props}) =>
 <Grid>
     <Panel bsStyle="primary">
         <Panel.Heading>Buscar Por : </Panel.Heading>
