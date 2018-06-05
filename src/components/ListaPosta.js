@@ -7,14 +7,14 @@ import './CssComponents/ListaPosta.css'
 
 
 const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,listarOnClick,
-                        listaChange,...props}) =>
+                        listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,...props}) =>
 <Grid>
     <Panel bsStyle="primary">
         <Panel.Heading>Buscar Por : </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
-                <BoxInput valoresBox={valoresBox1}/>
-                <Button bsStyle="primary">Buscar</Button>
+                <BoxInput BoxChange={buscarPorChange} valoresBox={valoresBox1}/>
+                <Button bsStyle="primary" onClick={buscarPorClick}>Buscar</Button>
             </Row>
         </Panel.Body>
     </Panel>
@@ -22,7 +22,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
         <Panel.Heading>Listar Por : </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
-                <LabelBox texto="Metricas" valoresBox={valoresBox2}/>
+                <LabelBox texto="Metricas" valoresBox={valoresBox2} onChangeBox={listaMetricaChange}/>
             </Row>
             <Row className="show-grid">
                 <LabelRadioButton texto="Niveles" valoresButton={valoresButton1} changeRadio={listaChange}/>

@@ -7,10 +7,15 @@ import './CssComponents/LabelLabels.css'
 import labelLabels from  './CssComponents/LabelLabels.css'
 import ejemplo from './CssComponents/ejemplo'
 import a from './CssComponents/LabelRadioButton.css'
-export const BoxInput = ({valoresBox}) =>
-    <FormGroup controlId="formBoxInput">
+export const BoxInput = ({valoresBox,BoxChange}) =>{
+    let handleOptionChange = (changeEvent) => {
+        let value = changeEvent.target.value
+        BoxChange(value)
+    };
+
+    return (<FormGroup controlId="formBoxInput">
         <Col md={2} mdOffset={2}>
-            <FormControl componentClass="select" placeholder="select">
+            <FormControl componentClass="select" placeholder="select" onChange={handleOptionChange}>
                 {
                     valoresBox.map( ( valor )=>{
                         return <option value={valor}>{valor}</option>
@@ -19,28 +24,33 @@ export const BoxInput = ({valoresBox}) =>
             </FormControl>
         </Col>
         <Col  md={4}>
-            <FormControl type="text" placeholder="Ingrese Texto"/>
+            <FormControl type="text" placeholder="Ingrese valor"/>
         </Col>
-    </FormGroup>
+    </FormGroup>)
+}
 
 
+export const LabelBox = ({texto,valoresBox,onChangeBox}) => {
 
-export const LabelBox = ({texto,valoresBox}) =>
-    <FormGroup controlId="formLabelBox">
+    let handleOptionChange = (changeEvent) => {
+        let valorRadio = changeEvent.target.value
+        onChangeBox(valorRadio)
+    };
+   return ( <FormGroup controlId="formLabelBox">
         <Col md={2} mdOffset={2}>
-            <ControlLabel >{texto}</ControlLabel>
+            <ControlLabel>{texto}</ControlLabel>
         </Col>
         <Col md={4}>
-            <FormControl componentClass="select" placeholder="select">
+            <FormControl componentClass="select" placeholder="select" onChange={handleOptionChange}>
                 {
-                    valoresBox.map( ( valor )=>{
-                        return <option value={valor.key}>{valor.nombre}</option>
+                    valoresBox.map((valor) => {
+                        return <option value={valor.idindicador} >{valor.nombre}</option>
                     })
                 }
             </FormControl>
         </Col>
-    </FormGroup>
-
+    </FormGroup>)
+}
 export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
     let handleOptionChange = (changeEvent) => {
         let valorRadio = changeEvent.target.value

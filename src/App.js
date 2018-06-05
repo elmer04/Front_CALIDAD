@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import {Tab, Tabs} from 'react-bootstrap'
+import {Tab, Tabs,Alert} from 'react-bootstrap'
 import XLSX from 'xlsx'
 import dataInitial from './initialState'
-import axios from 'axios'
+import api from './components/ComponentsSpecials/api'
 import SubirExcel from "./components/SubirExcel"
 import ListaPosta from "./components/ListaPosta"
 import RegistroMetricas from "./components/RegistroMetricas"
-import DescripcionPosta from "./components/DescripcionPosta";
+import DescripcionPosta from "./components/DescripcionPosta"
 
 
 class App extends Component {
@@ -23,7 +23,9 @@ class App extends Component {
           BoxNiveles:  dataInitial.BoxNiveles,
           filtroResultado:dataInitial.filtroResultado,
           metricaEnable: false,
+          buscarPor:dataInitial.BoxBuscar[0],
           selectListar : '',
+          selectMetricaListar : 1,
 
       }
 
@@ -35,12 +37,12 @@ class App extends Component {
 //CAMBIOS STEVE
     componentDidMount(){
       //RECUPERAR LAS METRICAS
-        axios.get('http://localhost:8000/datosmetricas/metricas').then( res => {
+        api.get('datosmetricas/metricas').then( res => {
             this.setState(prevState=> ({
                 metricas: res.data
             }))
         }).then(
-            axios.get('http://localhost:8000/eess/eessMetricaColor/1').then(res =>{
+            api.get('eess/eessMetricaColor/1').then(res =>{
                 this.setState(prevState => ({
                     eess: res.data
                 }))
@@ -52,7 +54,7 @@ class App extends Component {
     //LISTA METRICA
     enableRM = () =>{
       if(this.state.metricaEnable){
-          axios.get('http://localhost:8000/datosmetricas/metricas').then(res => {
+          api.get('datosmetricas/metricas').then(res => {
               this.setState(prevState=> ({
                   metricas: res.data,
                   metricaEnable: !prevState.metricaEnable
@@ -74,22 +76,45 @@ class App extends Component {
     }
 
     saveChanges=()=>{
-        axios.post(`http://localhost:8000/datosmetricas/metricasUpdate`,this.state.metricas).then(
+        api.post(`datosmetricas/metricasUpdate`,this.state.metricas).then(
                 this.setState(prevState=>({
                     metricaEnable: !prevState.metricaEnable
                 }))
             )
     }
 
+    buscarPorClick=()=>{
+        switch(this.state.buscarPor){
+            case dataInitial.BoxBuscar[0]:
+                console.log(1)
+                /*api.get(`eess/nombre/${this.state.buscarPor}`).then(res => {
+                    this.setState(prevState=> ({
+                        metricas: res.data,
+                        metricaEnable: !prevState.metricaEnable
+                    }))}
+                )*/
+                break;
+            case dataInitial.BoxBuscar[1]: console.log(2)
+        }
+    }
+
     escogerNivel=()=>{
-        axios.get(`http://localhost:8000/eess/eessMetricaColor/1/${this.state.selectListar}`).then(res =>{
+        api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res =>{
             this.setState(prevState => ({
                 eess: res.data
             }))
         })
     }
+
+    handleBuscarChange=(buscarPor) => {
+      this.setState({buscarPor:buscarPor})
+    }
+
     handleColorChange = (color) => {
         this.setState({selectListar : color})
+    }
+    handleMetricaChange = (metrica) => {
+        this.setState({selectMetricaListar : metrica})
     }
 
 
@@ -102,7 +127,7 @@ class App extends Component {
               view:1
           }))
       }else{
-          axios.get('http://localhost:8000/eess/api').then(res =>{
+          api.get('eess/api').then(res =>{
               this.setState(prevState => ({
                   eess: res.data,
                   view: 2
@@ -116,9 +141,15 @@ class App extends Component {
 */
   postMes = (key) => {
       //console.log("Estoy en postmes");
-      //console.log(key);
-      axios.post(`http://localhost:8000/datosmetricas/api/${key}`,this.state.rawData[key-1]).then(res =>
-            console.log(res)
+      console.log(key);
+      api.post(`datosmetricas/api/${key}`,this.state.rawData[key-1]).then( res =>{
+
+          api.get(`datosmetricas/ponerColor/${key}`).then(
+              <Alert bsStyle="success">
+                  <h1>Proceso Completado</h1>
+              </Alert>
+          )
+          }
       )
   }
 
@@ -128,13 +159,13 @@ class App extends Component {
       this.setState(prevState => {
           let xdData;
           xdData = prevState;
-
-          xdData.rawData[value.key-1][0].months=mimi
+          //console.log(value)
+          xdData.rawData[value.idindicador-1][0].months=mimi
 
           return xdData
           }
       );
-      console.log(this.state.rawData);
+      //console.log(this.state.rawData);
 
   }
 
@@ -196,13 +227,11 @@ class App extends Component {
               var result = {};
               workbook.SheetNames.forEach(function(sheetName) {
                   var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
-                  //
-                  //
                   if(roa.length) result[sheetName] = roa;
               });
-
-              //console.log(key.key);
-                    switch (key.key){
+              //KEY INDICADOR = KEY.
+              console.log(key.idindicador);
+                    switch (key.idindicador){
                         case 1:
                         case 3:
                         case 4:
@@ -225,10 +254,9 @@ class App extends Component {
 
                             }
                                 break;
-                        case 5:
-                        case 6:
+                        case 5: // CAMBIAR ALGORITMO
                             for (var k=1;k<=12;k++) {
-                                var xxd = result["ORIGINAL"].map((val, pos) => {
+                                var xxd = result["Original"].map((val, pos) => {
                                     if (pos > 5 && val[0]) {
                                         return Object.assign({}, {
                                             id: pos - 5,
@@ -245,12 +273,29 @@ class App extends Component {
 
                             }
                             break;
+                        case 6:
+                            for (var k=1;k<=12;k++) {
+                                var xxd = result["original"].map((val, pos) => {
+                                    if (pos > 5 && val[0]) {
+                                        return Object.assign({}, {
+                                            id: pos - 5,
+                                            renaes: "",
+                                            nombre: val[1],
+                                            meta: parseInt(val[k*3-1]),
+                                            mes: parseInt(val[k*3]),
+                                            pct: parseFloat(val[1+k*3])
+                                        })
+                                    }
+                                }).filter(item => item);
+                                months[k-1].eess = xxd
+                            }
+                            break;
                         case 2:
                             for (var k=1;k<=12;k++) {
                                 var xxd = result["Original"].map((val, pos) => {
                                     if (pos > 5 && val[0]) {
                                         return Object.assign({}, {
-                                            id: pos - 5,
+                                            id: pos - 9,
                                             nombre: val[1],
                                             meta: parseInt(val[k*3-1]),
                                             pp: parseInt(val[k*3]),
@@ -299,7 +344,8 @@ class App extends Component {
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
                                 valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
                                 valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
-                                listaChange={this.handleColorChange}/>
+                                listaChange={this.handleColorChange} listaMetricaChange={this.handleMetricaChange}
+                                buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick} />
                   </Tab>
                   <Tab eventKey={4} title="Descripcion de la Posta">
                     <DescripcionPosta texto={"Nombre de Posta"} fechaultima={["12","34","34"]}

@@ -6,10 +6,10 @@ import {Button} from 'react-bootstrap';
 const MetricUpload = ({data,me,onClick,...props}) =>
     <div>
         <FilePickerNLabel me={me}{...props}/>
-        <Button bsStyle="primary" type="submit" onClick={()=>onClick(me.key)}>SUBIR A LA BASE DE DATOS</Button>
+        <Button bsStyle="primary" type="submit" onClick={()=>onClick(me.idindicador)}>SUBIR A LA BASE DE DATOS</Button>
 
         {data.months.map((n,i)=>{
-            //{console.log(i,n);}
+            //{console.log(n);}
             return <GridSave key={i} data={n} {...props}/>
         })}
 
