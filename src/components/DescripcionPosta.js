@@ -4,7 +4,7 @@ import { LabelCuadritos, LabelLabels, LabelText} from "./ComponentesAux"
 import {Panel} from 'react-bootstrap'
 import { Grid,Row,Col } from 'react-bootstrap'
 import ParetoDiagram from './ParetoDiagram'
-
+import Map from './Map'
 import './CssComponents/DescripcionPosta.css'
 
 const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores,...props}) =>
@@ -36,7 +36,7 @@ const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores,...pr
                 <Panel bsStyle="primary">
                     <Panel.Heading>Ubicación</Panel.Heading>
                     <Panel.Body>
-
+                    <Map isMarkerShown />
                     </Panel.Body>
                 </Panel>
             </Col>
