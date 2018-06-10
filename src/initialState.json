@@ -284,6 +284,20 @@
       "color":""
     }
   ],
+  "Niveles":[
+    {
+      "nombre":"rojo",
+      "color":"#ff3300"
+    },
+    {
+      "nombre":"amarillo",
+      "color":"#ffff66"
+    },
+    {
+      "nombre":"verde",
+      "color":"#66ff66"
+    }
+  ],
   "filtroResultado":[
     {
       "key":"mn",

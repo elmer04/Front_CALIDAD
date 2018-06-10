@@ -31,6 +31,7 @@ class App extends Component {
           selectListar : '',
           selectMetricaListar : 1,
           posta : dataInitial.posta,
+          niveles: dataInitial.Niveles,
           max_min : true,
           openModal : false,
       }
@@ -399,7 +400,7 @@ class App extends Component {
                   <Modal open={this.state.openModal} onClose={this.onCloseModal}
                          classNames={{ modal:'custom-modal'}}>
                     <DescripcionPosta posta={this.state.posta} fechaultima={["12","34","34"]}
-                                      fechaproxima ={["12","34","34"]} colores={this.state.BoxNiveles}
+                                      fechaproxima ={["12","34","34"]} colores={this.state.niveles}
                                       metricas={this.state.metricas} />
 
                   </Modal>
