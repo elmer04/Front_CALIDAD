@@ -7,10 +7,15 @@ import './CssComponents/LabelLabels.css'
 //import labelLabels from  './CssComponents/LabelLabels.css'
 //import ejemplo from './CssComponents/ejemplo'
 //import a from './CssComponents/LabelRadioButton.css'
-export const BoxInput = ({valoresBox,BoxChange}) =>{
+export const BoxInput = ({valoresBox,BoxChange,TextChange}) =>{
     let handleOptionChange = (changeEvent) => {
         let value = changeEvent.target.value
         BoxChange(value)
+    };
+
+    let handleTextChange = (changeEvent) => {
+        let value = changeEvent.target.value
+        TextChange(value)
     };
 
     return (<FormGroup controlId="formBoxInput">
@@ -24,7 +29,7 @@ export const BoxInput = ({valoresBox,BoxChange}) =>{
             </FormControl>
         </Col>
         <Col  md={4}>
-            <FormControl type="text" placeholder="Ingrese valor"/>
+            <FormControl type="text" placeholder="Ingrese valor" onChange={handleTextChange}/>
         </Col>
     </FormGroup>)
 }
@@ -65,7 +70,7 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
             <FormGroup>
                 {
                     valoresButton.map((valor) => {
-                        return <Radio name="radioGroup" onChange={handleOptionChange}
+                        return <Radio name="radioGroup1" onChange={handleOptionChange}
                                           className="radios" value={valor.nombre}>{valor.nombre}</Radio>
 
                     })
@@ -77,7 +82,7 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
 
 
 export const LabelTextArea = ({texto,value,index,onChangeEditar,disable=false})=> {
-    const handleChange= (event) => {
+    let handleChange= (event) => {
 
         console.log(event.target.value)
         onChangeEditar(event.target.value,index);
@@ -95,14 +100,21 @@ export const LabelTextArea = ({texto,value,index,onChangeEditar,disable=false})=
     );
 };
 
-export const RadioButtons = ({valores}) =>
-    <FormGroup  controlId="formRadioButtons">
-        {
-            valores.map((valor)=>{
-                return <Radio name="radioGroup" value={valor.key} inline>{valor.nombre}</Radio>
-            })
-        }
-    </FormGroup>
+export const RadioButtons = ({valores,radioChange}) => {
+    let handleRadioChange = (changeEvent) => {
+        let valorRadio = changeEvent.target.value
+        radioChange(valorRadio)
+    };
+
+   return ( <FormGroup controlId="formRadioButtons">
+                {
+                    valores.map((valor) => {
+                        return <Radio name="radioGroup2" value={valor.key} onChange={handleRadioChange}inline>{valor.nombre}</Radio>
+                    })
+                }
+            </FormGroup>
+   )
+}
 
 export const LabelCuadritos = ({texto,valoresCuadritos})=>
     <FormGroup  controlId="formLabelCuadritos">

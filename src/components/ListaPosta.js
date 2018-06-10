@@ -8,14 +8,14 @@ import DescripcionPosta from "./DescripcionPosta";
 
 
 const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,listarOnClick,
-                        listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,
-                        ...props}) =>
+                        listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,buscarTextChange,
+                        OrdenChange,...props}) =>
 <Grid>
     <Panel bsStyle="primary">
         <Panel.Heading>Buscar Por : </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
-                <BoxInput BoxChange={buscarPorChange} valoresBox={valoresBox1}/>
+                <BoxInput BoxChange={buscarPorChange}  TextChange={buscarTextChange} valoresBox={valoresBox1}/>
                 <Button bsStyle="primary" onClick={buscarPorClick}>Buscar</Button>
             </Row>
         </Panel.Body>
@@ -38,7 +38,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
             <Row className="show-grid">
                 <Col mdOffset={2}>
                     <div className="RadioButtonResultado">
-                        <RadioButtons valores={filtroResultado}/>
+                        <RadioButtons valores={filtroResultado} radioChange={OrdenChange}/>
                     </div>
                 </Col>
                 <EESSList eess={eess} colores={valoresButton1}/>

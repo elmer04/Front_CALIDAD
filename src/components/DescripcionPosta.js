@@ -10,7 +10,7 @@ import './CssComponents/DescripcionPosta.css'
 const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores,...props}) =>
     <Grid>
         <Row>
-            <h1>{posta.nombre}</h1>
+            <h1 className="titulo">{posta.nombre}</h1>
         </Row>
         <Row>
             <Col md={6} id="Paneles">

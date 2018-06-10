@@ -278,6 +278,10 @@
     {
       "nombre":"verde",
       "color":"#66ff66"
+    },
+    {
+      "nombre":"total",
+      "color":""
     }
   ],
   "filtroResultado":[
@@ -312,23 +316,24 @@
       "direccion": "Mi casa",
       "renaes": "000005814",
       "diris_iddiris": 1,
-      "color":"verde",
-      "porcentaje":67.30,
       "metricas":[
         {
           "idindicador":1,
           "nombre":"metrica 1",
-          "color":"rojo"
+          "color":"rojo",
+          "porcentaje":30.40
         },
         {
           "idindicador":2,
           "nombre":"metrica 2",
-          "color":"verde"
+          "color":"verde",
+          "porcentaje":60.40
         },
         {
           "idindicador":3,
           "nombre":"metrica 3",
-          "color":"amarillo"
+          "color":"amarillo",
+          "porcentaje":50.40
         }
       ]
     }

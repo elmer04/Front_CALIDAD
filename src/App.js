@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import './components/CssComponents/ModalResponsive.css'
 import {Tab, Tabs,Alert} from 'react-bootstrap'
+import Modal from 'react-responsive-modal'
 import XLSX from 'xlsx'
 import dataInitial from './initialState'
 import api from './components/ComponentsSpecials/api'
@@ -9,6 +11,7 @@ import SubirExcel from "./components/SubirExcel"
 import ListaPosta from "./components/ListaPosta"
 import RegistroMetricas from "./components/RegistroMetricas"
 import DescripcionPosta from "./components/DescripcionPosta"
+import GridSave from "./components/GridSave";
 
 
 class App extends Component {
@@ -24,10 +27,12 @@ class App extends Component {
           filtroResultado:dataInitial.filtroResultado,
           metricaEnable: false,
           buscarPor:dataInitial.BoxBuscar[0],
+          buscarText:'',
           selectListar : '',
           selectMetricaListar : 1,
           posta : dataInitial.posta,
-
+          max_min : true,
+          openModal : false,
       }
 
       this.parse = this.parse.bind(this);
@@ -85,33 +90,52 @@ class App extends Component {
     }
 
     buscarPorClick=()=>{
-      this.setState({selectOrBuscar : 2});
-
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
                 console.log(1)
-                /*api.get(`eess/nombre/${this.state.buscarPor}`).then(res => {
-                    this.setState(prevState=> ({
-                        metricas: res.data,
-                        metricaEnable: !prevState.metricaEnable
-                    }))}
-                )*/
+                api.get(`eess/renaes/${this.state.buscarText}`).then(res =>
+                    {
+                        this.setState({posta:res.data,openModal:true})
+                    }
+                ).catch(rej => {
+                        console.log("NO EXISTE CENTRO DE SALUD")
+                    }
+                )
+
                 break;
-            case dataInitial.BoxBuscar[1]: console.log(2)
+            case dataInitial.BoxBuscar[1]:
+                console.log(2)
+                api.get(`eess/nombre/${this.state.buscarText}`).then(res =>
+                    {
+                        this.setState({posta:res.data,openModal:true})
+                    }
+                ).catch(rej => {
+                        console.log("NO EXISTE CENTRO DE SALUD")
+                    }
+                )
         }
     }
 
     escogerNivel=()=>{
-        this.setState({selectOrBuscar : 1});
-        api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res =>{
-            this.setState(prevState => ({
-                eess: res.data
-            }))
-        })
+        if(this.state.selectListar=='total') {
+            //console.log('estoy en lista 1');
+            api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}`).then(res => {
+                this.setState({eess: res.data})
+            })
+        }else {
+            //console.log('estoy en listar 2');
+            api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
+                this.setState({eess: res.data})
+            })
+        }
     }
 
     handleBuscarChange=(buscarPor) => {
       this.setState({buscarPor:buscarPor})
+    }
+
+    handleBuscarTextChange=(buscarText) => {
+        this.setState({buscarText:buscarText})
     }
 
     handleColorChange = (color) => {
@@ -121,6 +145,24 @@ class App extends Component {
         this.setState({selectMetricaListar : metrica})
     }
 
+    handleOrdenChange= (tipo) => {
+        switch(tipo){
+            case this.state.filtroResultado[0].key:
+                this.setState(prevState=>({
+                    eess : prevState.eess.sort((e1,e2)=> e1.porcentaje-e2.porcentaje)
+                }))
+                break;
+            case this.state.filtroResultado[1].key:
+                this.setState(prevState=>({
+                    eess : prevState.eess.sort((e1,e2)=> e2.porcentaje-e1.porcentaje)
+                }))
+
+        }
+    }
+
+    onCloseModal = () =>{
+        this.setState({openModal:false})
+    }
 
 
 
@@ -334,7 +376,7 @@ class App extends Component {
                   <img src={logo} className="App-logo" alt="logo"/>
                   <h1 className="App-title">MODULO de Administrador</h1>
               </header>
-              <Tabs defaultActiveKey={4} id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey={3} id="uncontrolled-tab-example">
                   <Tab eventKey={1} title="Registro de métricas">
                     <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}
                                       editable={this.state.metricaEnable} onClickEditar={this.enableRM}
@@ -350,17 +392,24 @@ class App extends Component {
                                 valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
                                 listaChange={this.handleColorChange} listaMetricaChange={this.handleMetricaChange}
                                 buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick}
+                                buscarTextChange={this.handleBuscarTextChange} OrdenChange={this.handleOrdenChange}
                                 />
                   </Tab>
-                  <Tab eventKey={4} title="Descripcion de la Posta">
+
+                  <Modal open={this.state.openModal} onClose={this.onCloseModal}
+                         classNames={{ modal:'custom-modal'}}>
                     <DescripcionPosta posta={this.state.posta} fechaultima={["12","34","34"]}
                                       fechaproxima ={["12","34","34"]} colores={this.state.BoxNiveles}
                                       metricas={this.state.metricas} />
-                  </Tab>
+
+                  </Modal>
               </Tabs>
           </div>
       )
       /*
+
+       <Tab eventKey={4} title="Descripcion de la Posta">
+      </Tab>
       if (this.state.view===1){
     return (
         <div>
