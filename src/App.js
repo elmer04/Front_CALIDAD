@@ -11,7 +11,9 @@ import SubirExcel from "./components/SubirExcel"
 import ListaPosta from "./components/ListaPosta"
 import RegistroMetricas from "./components/RegistroMetricas"
 import DescripcionPosta from "./components/DescripcionPosta"
+import NotesPanel from './components/NotesPanel'
 import GridSave from "./components/GridSave";
+import NotesList from "./components/NotesList";
 
 
 class App extends Component {
@@ -395,6 +397,9 @@ class App extends Component {
                                 buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick}
                                 buscarTextChange={this.handleBuscarTextChange} OrdenChange={this.handleOrdenChange}
                                 />
+                  </Tab>
+                  <Tab eventKey={4} title="Notas prueba">
+                      <NotesPanel/>
                   </Tab>
 
                   <Modal open={this.state.openModal} onClose={this.onCloseModal}
