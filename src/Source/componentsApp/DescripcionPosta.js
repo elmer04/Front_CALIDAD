@@ -14,13 +14,6 @@ const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
         </Row>
         <Row>
             <Col md={6} id="Paneles">
-                <Panel bsStyle="primary"  >
-                    <Panel.Heading>Descripcion de Visitas</Panel.Heading>
-                    <Panel.Body>
-                        <LabelCuadritos texto={"Fecha ultima"} valoresCuadritos={fechaultima}/>
-                        <LabelCuadritos texto={"Fecha proxima"} valoresCuadritos={fechaproxima}/>
-                    </Panel.Body>
-                </Panel>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Descripcion General</Panel.Heading>
                     <Panel.Body>
