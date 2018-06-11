@@ -1,7 +1,7 @@
 import React from 'react';
-import './Note.css'
+import './CssComponents/Note.css'
 
-const Note = ({noteContent,...props}) =>
+const Note = ({noteContent}) =>
     <section className="notes" >
         <button onClick={f=>f}>X</button>
         <div className='notes'>

@@ -7,7 +7,7 @@ import ParetoDiagram from './ParetoDiagram'
 import Map from './Map'
 import './CssComponents/DescripcionPosta.css'
 
-const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores,...props}) =>
+const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
     <Grid>
         <Row>
             <h1 className="titulo">{posta.nombre}</h1>
@@ -27,7 +27,7 @@ const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores,...pr
                         <Row>
                             <LabelText texto={"Tipo"} value={posta.tipo} disable={true} />
                         </Row>
-                        <br></br>
+                        <br/>
                         <Row>
                             <LabelText texto={"Jefe"} value={posta.gerente} disable={true} />
                         </Row>

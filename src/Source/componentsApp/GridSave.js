@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDataGrid from 'react-data-grid';
 
-const GridSave = ({data,rows=[{total: 100, sis: 75, pct: 75}],columns=[{key:'total', name:'Total'},
-    {key:'sis', name:'SIS'},
-    {key:'pct', name:'Porcentaje'}
-],...props}) =>
+//rows=[{total: 100, sis: 75, pct: 75}],columns=[{key:'total', name:'Total'},
+//     {key:'sis', name:'SIS'},
+//     {key:'pct', name:'Porcentaje'}
+// ],...props}
+
+const GridSave = ({data}) =>
     <div>
         {
          //   console.log(data.eess)

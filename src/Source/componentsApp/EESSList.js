@@ -1,23 +1,23 @@
 import React from 'react';
 
-const EESSList = ({eess=[],colores,...props}) =>
+const EESSList = ({eess=[],colores}) =>
     <div>
         {
-            eess.map((val)=>{
+            eess.map((val,key)=>{
             let color=colores.find(color => color.nombre ===val.color);
-            var styles = {
+            let styles = {
                 height: '70px',
                 width: '200px',
                 backgroundColor: color.color,
                 padding: '15px',
                 margin: '20px'
             };
-            return <label style={styles}>
+            return <label style={styles} key={key}>
                 {val.nombre}
             </label>
             })
         }
-    </div>
+    </div>;
 
 
 export default EESSList

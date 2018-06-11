@@ -2,11 +2,11 @@ import React from 'react';
 import {Button} from 'react-bootstrap'
 import { Grid ,Row,Col} from 'react-bootstrap'
 import {LabelTextArea} from "./ComponentesAux";
-import  "./CssComponents/RegistroMetricas.css";
+import "./CssComponents/RegistroMetricas.css";
 
 
 
-const RegistroMetricas = ({texto,valores,editable,onClickEditar,onClickGuardar,changeEditar,...props}) =>
+const RegistroMetricas = ({texto,valores,editable,onClickEditar,onClickGuardar,changeEditar}) =>
     <Grid>
         <Row>
             <h1>{texto}</h1>
@@ -14,7 +14,7 @@ const RegistroMetricas = ({texto,valores,editable,onClickEditar,onClickGuardar,c
         {
 
             valores.map((valor,index)=>{
-                return  <Row>
+                return  <Row key={index}>
                             <LabelTextArea onChangeEditar={changeEditar} index={index}
                                            texto={"Metrica "+(index+1)} value={valor.nombre}  disable={!editable}/>
                         </Row>

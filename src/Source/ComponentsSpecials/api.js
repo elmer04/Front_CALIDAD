@@ -5,7 +5,7 @@ export default axios.create({
 });
 
 // FASE PRODUCCION
-// `http://localhost:8000`
+// `http://localhost:8000/`
 
 // FASE PRODUCCION
 // `https://apipeves.herokuapp.com/`

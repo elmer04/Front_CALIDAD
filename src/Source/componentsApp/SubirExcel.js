@@ -2,7 +2,7 @@ import React from 'react';
 import MetricTabs from "./MetricTabs";
 import { Grid,Col } from 'react-bootstrap'
 
-const SubirExcel = ({rawData,metricas,postMes,parse,...props}) =>
+const SubirExcel = ({rawData,metricas,postMes,parse}) =>
 <div>
     <Grid>
         <Col>

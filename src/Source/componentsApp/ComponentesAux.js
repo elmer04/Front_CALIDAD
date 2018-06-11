@@ -22,8 +22,8 @@ export const BoxInput = ({valoresBox,BoxChange,TextChange}) =>{
         <Col md={2} mdOffset={2}>
             <FormControl componentClass="select" placeholder="select" onChange={handleOptionChange}>
                 {
-                    valoresBox.map( ( valor )=>{
-                        return <option value={valor}>{valor}</option>
+                    valoresBox.map( ( valor , key)=>{
+                        return <option value={valor} key={key}>{valor}</option>
                     })
                 }
             </FormControl>
@@ -48,8 +48,8 @@ export const LabelBox = ({texto,valoresBox,onChangeBox}) => {
         <Col md={4}>
             <FormControl componentClass="select" placeholder="select" onChange={handleOptionChange}>
                 {
-                    valoresBox.map((valor) => {
-                        return <option value={valor.idindicador} >{valor.nombre}</option>
+                    valoresBox.map((valor,key) => {
+                        return <option value={valor.idindicador} key={key}>{valor.nombre}</option>
                     })
                 }
             </FormControl>
@@ -69,9 +69,9 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
         <Col md={4}>
             <FormGroup>
                 {
-                    valoresButton.map((valor) => {
+                    valoresButton.map((valor,key) => {
                         return <Radio name="radioGroup1" onChange={handleOptionChange}
-                                          className="radios" value={valor.nombre}>{valor.nombre}</Radio>
+                                          className="radios" value={valor.nombre} key={key}>{valor.nombre}</Radio>
 
                     })
                 }
@@ -108,8 +108,9 @@ export const RadioButtons = ({valores,radioChange}) => {
 
    return ( <FormGroup controlId="formRadioButtons">
                 {
-                    valores.map((valor) => {
-                        return <Radio name="radioGroup2" value={valor.key} onChange={handleRadioChange}inline>{valor.nombre}</Radio>
+                    valores.map((valor,key) => {
+                        return <Radio name="radioGroup2" key={key} value={valor.key}
+                                      onChange={handleRadioChange}inline>{valor.nombre}</Radio>
                     })
                 }
             </FormGroup>

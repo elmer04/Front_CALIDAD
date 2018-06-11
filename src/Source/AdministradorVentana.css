@@ -1,0 +1,29 @@
+.AdministradorVentana {
+  text-align: center;
+}
+
+.AdministradorVentana-logo {
+  animation: AdministradorVentana-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.AdministradorVentana-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.AdministradorVentana-title {
+  font-size: 1.5em;
+}
+
+.AdministradorVentana-intro {
+  font-size: large;
+}
+
+
+@keyframes AdministradorVentana-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
