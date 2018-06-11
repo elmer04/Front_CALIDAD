@@ -5,49 +5,46 @@ import './CssComponents/ParetoDiagram.css'
 
 const dataFeik = [
     {
-        mini: 'metrica 1',
+        mini: 'indicador 1',
         def: 20.56,
         nombre: 'Numero de feiks con cancer'
     },
     {
-        mini: 'metrica 2',
+        mini: 'indicador 2',
         def: 79.56,
         nombre: 'Numero de feiks con gripe'
     },
     {
-        mini: 'metrica 3',
+        mini: 'indicador 3',
         def: 45.56,
         nombre: 'Numero de feiks con viruela'
     },
     {
-        mini: 'metrica 4',
+        mini: 'indicador 4',
         def: 25.6,
         nombre: 'Numero de feiks con alzheimer'
     }
 ]
 
 const m = {top: 50, right: 50, bottom: 50, left: 50}
-    , h = 500 - m.top - m.bottom
-    , w = 960 - m.left - m.right
-    , barWidth = 5;
-
+const barWidth = 5;
 
 class ParetoDiagram extends Component {
-    constructor(props){
-        super(props)
+    constructor(...props){
+        super(...props)
         this.createBarChart = this.createBarChart.bind(this)
     }
     componentDidMount() {
         this.createBarChart()
     }
-    componentDidUpdate() {
 
-    }
     createBarChart() {
         const node = this.node;
+        let w  = node.clientWidth;
+        let h = w * 500 / 960;
         let pData = this.convertDataToPareto(dataFeik);
 
-        console.log(pData)
+        console.log(h,w)
 
         let xScale = d3.scaleBand().rangeRound([0,w]).padding(0.1);
         xScale.domain(pData.map(d=>d.mini))
@@ -64,7 +61,8 @@ class ParetoDiagram extends Component {
 
         let yAxis2 = d3.axisRight(yCum)
 
-        let svg = select(node).attr('width',w+m.left+m.right).attr('height',h+m.top+m.bottom).append('g').attr("transform", "translate(" + m.left + "," + m.top + ")");
+        let svg = select(node).append('svg').attr("viewBox", "0, 0,"+ (w+ m.left+ m.right) +", "+ (h+ m.top+ m.bottom) ).attr("preserveAspectRatio", "xMidYMid meet")
+            .attr('width','100%').append('g').attr("transform", "translate(" + m.left + "," + m.top + ")");
 
         let bar = svg.selectAll('bar').data(pData).enter().append('g').attr('class','bar')
 
@@ -77,11 +75,10 @@ class ParetoDiagram extends Component {
         svg.append('g').attr('class','x axis').attr('transform','translate(0,'+h+')').call(xAxis)
 
         svg.append('g').attr('class','y axis').call(yAxis).append('text')
-            .attr('transform','rotate(-90)').attr('y',6).attr('dy','.71em').style('text-anchor','end').text('Cantidad')
+            .attr('transform','rotate(-90)').attr('y',6).attr('dy','.71em').style('text-anchor','end').style('fill','black').text('Cantidad')
 
         svg.append('g').attr('class','y axis').attr('transform','translate('+[w,0]+')').call(yAxis2).append('text')
-            .attr('transform','rotate(-90)').attr('y',4).attr('dy','-.71em').style('text-anchor','end').text('Acumulado')
-
+            .attr('transform','rotate(-90)').attr('y',4).attr('dy','-.71em').style('text-anchor','end').style('fill','black').text('Acumulado %')
 
     }
 
@@ -99,10 +96,7 @@ class ParetoDiagram extends Component {
     }
 
 
-    render() {
-        return <svg ref={node => this.node = node}
-                    >
-        </svg>
-    }
+    render = () => 
+        <div ref={node=>this.node=node} />
 }
 export default ParetoDiagram
