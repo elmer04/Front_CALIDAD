@@ -1,11 +1,25 @@
 import React from 'react';
 //import EESSList from "./EESSList";
 import { LabelCuadritos, LabelLabels, LabelText} from "./ComponentesAux"
-import {Panel} from 'react-bootstrap'
+import {Panel,ControlLabel} from 'react-bootstrap'
 import { Grid,Row,Col } from 'react-bootstrap'
 import ParetoDiagram from './ParetoDiagram'
 import Map from './Map'
 import './CssComponents/DescripcionPosta.css'
+
+let convertir_data=(data)=>{
+      let data2=[];
+      data.map((valor)=>{
+          data2.push({
+              mini:'indicador '+valor.idindicador,
+              def:valor.porcentaje,
+              nombre:valor.nombre
+          })
+      })
+      return data2;
+};
+
+
 
 const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
     <Grid>
@@ -29,7 +43,17 @@ const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Ubicación</Panel.Heading>
                     <Panel.Body>
-                    <Map isMarkerShown />
+                        {
+                            (()=>{
+                                if(posta.latitud!=null && posta.longitud!=null) {
+                                    return <Map isMarkerShown lat={posta.latitud} lng={posta.longitud}
+                                            nombre={posta.nombre}/>
+                                }else
+                                    return  <Col componentClass={ControlLabel} md={6} mdOffset={3} >
+                                               POSICION DESCONOCIDA
+                                            </Col>
+                            })()
+                        }
                     </Panel.Body>
                 </Panel>
             </Col>
@@ -61,7 +85,7 @@ const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Diagrama de Pareto</Panel.Heading>
                     <Panel.Body>
-                        <ParetoDiagram data={[5,10,1,3]} size={[400,400]} />
+                        <ParetoDiagram data={convertir_data(posta.metricas)} size={[400,400]} />
                     </Panel.Body>
                 </Panel>
             </Col>

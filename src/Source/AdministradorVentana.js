@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import logo from './Imagenes/logo.svg'
 import './AdministradorVentana.css'
-import './componentsApp/CssComponents/ModalResponsive.css'
 import {Tab, Tabs,Alert} from 'react-bootstrap'
-import Modal from 'react-responsive-modal'
 import XLSX from 'xlsx'
 import dataInitial from './JsonInitial/initialState'
 import api from './ComponentsSpecials/api'
 import SubirExcel from "./componentsApp/SubirExcel"
-import ListaPosta from "./componentsApp/ListaPosta"
 import RegistroMetricas from "./componentsApp/RegistroMetricas"
-import DescripcionPosta from "./componentsApp/DescripcionPosta"
-import NotesPanel from './componentsApp/NotesPanel'
-
 
 class AdministradorVentana extends Component {
   constructor(...props){
@@ -20,21 +14,19 @@ class AdministradorVentana extends Component {
       this.state = {
           //view: 1,
           metricas:dataInitial.valoresMetricas,
-          eess: dataInitial.eess,
+          //eess: dataInitial.eess,
           rawData: dataInitial.rawdataInitial,
-          BoxBuscar: dataInitial.BoxBuscar,
-          BoxNiveles:  dataInitial.BoxNiveles,
-          filtroResultado:dataInitial.filtroResultado,
+          //BoxBuscar: dataInitial.BoxBuscar,
+          //BoxNiveles:  dataInitial.BoxNiveles,
+          //filtroResultado:dataInitial.filtroResultado,
           metricaEnable: false,
-          buscarPor:dataInitial.BoxBuscar[0],
-          buscarText:'',
-          selectListar : '',
-          selectMetricaListar : 1,
-          posta : dataInitial.posta,
-          niveles: dataInitial.Niveles,
-          max_min : true,
-          openModal : false,
-          Autorizado:false
+          //buscarPor:dataInitial.BoxBuscar[0],
+          //buscarText:'',
+          //selectListar : '',
+          //selectMetricaListar : 1,
+          //posta : dataInitial.posta,
+          //niveles: dataInitial.Niveles,
+          //max_min : true,
       }
 
       this.parse = this.parse.bind(this);
@@ -49,13 +41,7 @@ class AdministradorVentana extends Component {
             this.setState({
                 metricas: res.data
             })
-        }).then(
-            api.get('eess/eessMetricaColor/1').then(res =>{
-                this.setState({
-                    eess: res.data
-                })
-            })
-        )
+        })
     }
 
 //FUNCIONE STEVE
@@ -91,79 +77,6 @@ class AdministradorVentana extends Component {
             )
     }
 
-    buscarPorClick=()=>{
-        switch(this.state.buscarPor){
-            case dataInitial.BoxBuscar[0]:
-                console.log(1)
-                api.get(`eess/renaes/${this.state.buscarText}`).then(res =>
-                    {
-                        this.setState({posta:res.data,openModal:true})
-                    }
-                ).catch(
-                        console.log("NO EXISTE CENTRO DE SALUD")
-                )
-
-                break;
-            case dataInitial.BoxBuscar[1]:
-                console.log(2)
-                api.get(`eess/nombre/${this.state.buscarText}`).then(res =>
-                    {
-                        this.setState({posta:res.data,openModal:true})
-                    }
-                ).catch(
-                        console.log("NO EXISTE CENTRO DE SALUD")
-                )
-        }
-    }
-
-    escogerNivel=()=>{
-        if(this.state.selectListar=='total') {
-            //console.log('estoy en lista 1');
-            api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}`).then(res => {
-                this.setState({eess: res.data})
-            })
-        }else {
-            //console.log('estoy en listar 2');
-            api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
-                this.setState({eess: res.data})
-            })
-        }
-    }
-
-    handleBuscarChange=(buscarPor) => {
-      this.setState({buscarPor:buscarPor})
-    }
-
-    handleBuscarTextChange=(buscarText) => {
-        this.setState({buscarText:buscarText})
-    }
-
-    handleColorChange = (color) => {
-        this.setState({selectListar : color})
-    }
-    handleMetricaChange = (metrica) => {
-        this.setState({selectMetricaListar : metrica})
-    }
-
-    handleOrdenChange= (tipo) => {
-        switch(tipo){
-            case this.state.filtroResultado[0].key:
-                this.setState(prevState=>({
-                    eess : prevState.eess.sort((e1,e2)=> e1.porcentaje-e2.porcentaje)
-                }))
-                break;
-            case this.state.filtroResultado[1].key:
-                this.setState(prevState=>({
-                    eess : prevState.eess.sort((e1,e2)=> e2.porcentaje-e1.porcentaje)
-                }))
-
-        }
-    }
-
-    onCloseModal = () =>{
-        this.setState({openModal:false})
-    }
-
 
 
 //CAMBIOS ALEJANDRO
@@ -186,14 +99,10 @@ class AdministradorVentana extends Component {
   }
 */
   postMes = (key) => {
-      //console.log("Estoy en postmes");
       console.log(key);
       api.post(`datosmetricas/api/${key}`,this.state.rawData[key-1]).then( res =>{
-
           api.get(`datosmetricas/ponerColor/${key}`).then(
-              <Alert bsStyle="success">
-                  <h1>Proceso Completado</h1>
-              </Alert>
+
           )
           }
       )
@@ -376,7 +285,7 @@ class AdministradorVentana extends Component {
                   <img src={logo} className="AdministradorVentana-logo" alt="logo"/>
                   <h1 className="AdministradorVentana-title">MODULO de Administrador</h1>
               </header>
-              <Tabs defaultActiveKey={5} id="uncontrolled-tab-example">
+              <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
                   <Tab eventKey={1} title="Registro de métricas">
                     <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}
                                       editable={this.state.metricaEnable} onClickEditar={this.enableRM}
@@ -386,81 +295,10 @@ class AdministradorVentana extends Component {
                     <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas}
                                 postMes={this.postMes} parse={(this.parse)}/>
                   </Tab>
-                  <Tab eventKey={3} title="Lista de Postas">
-                    <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
-                                valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
-                                valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
-                                listaChange={this.handleColorChange} listaMetricaChange={this.handleMetricaChange}
-                                buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick}
-                                buscarTextChange={this.handleBuscarTextChange} OrdenChange={this.handleOrdenChange}
-                                />
-                  </Tab>
-                  <Tab eventKey={4} title="Notas prueba">
-                      <NotesPanel/>
-                  </Tab>
-
-                  <Modal open={this.state.openModal} onClose={this.onCloseModal}
-                         classNames={{ modal:'custom-modal'}}>
-                    <DescripcionPosta posta={this.state.posta} fechaultima={["12","34","34"]}
-                                      fechaproxima ={["12","34","34"]} colores={this.state.niveles}
-                                      metricas={this.state.metricas} />
-
-                  </Modal>
               </Tabs>
+
           </div>
       )
-      /*
-
-       <Tab eventKey={4} title="Descripcion de la Posta">
-      </Tab>
-      if (this.state.view===1){
-    return (
-        <div>
-        <Grid>
-            <Col xs={3} md={2}>
-                <Button bsStyle="primary" type="submit" onClick={this.changeView}>HOli</Button>
-            </Col>
-            <Col xs={3} md={2}>
-                <Button bsStyle="primary" type="submit" onClick={this.changeView}>CAMBIAR VISTA</Button>
-            </Col>
-            <Col xs={12} md={8}>
-                <div className="AdministradorVentana">
-                    <header className="AdministradorVentana-header">
-                        <img src={logo} className="AdministradorVentana-logo" alt="logo" />
-                        <h1 className="AdministradorVentana-title">MODULO de Administrador</h1>
-                    </header>
-                    <MetricTabs data={this.state.rawData} metrics={this.state.metricas} onClick={this.postMes} parse={this.parse}/>
-                </div>
-            </Col>
-            <Col xs={3} md={2}>
-            </Col>
-
-        </Grid>
-        </div>
-    )}else {
-          return(
-              <Grid>
-                  <Col xs={3} md={2}>
-                      <Button bsStyle="primary" type="submit" onClick={this.changeView}>CAMBIAR VISTA</Button>
-                  </Col>
-                  <Col xs={12} md={8}>
-                      <div className="AdministradorVentana">
-                          <header className="AdministradorVentana-header">
-                              <img src={logo} className="AdministradorVentana-logo" alt="logo" />
-                              <h1 className="AdministradorVentana-title">MODULO de DIRIS</h1>
-                          </header>
-                          <Row>
-                            <EESSList eess={this.state.eess}/>
-                          </Row>
-                      </div>
-                  </Col>
-                  <Col xs={3} md={2}>
-                  </Col>
-
-              </Grid>
-
-          )
-      }*/
   }
 }
 

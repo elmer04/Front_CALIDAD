@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Login from "./Source/Login";
 import AdministradorVentana from "./Source/AdministradorVentana";
 import api from "./Source/ComponentsSpecials/api";
+import dataLogin from "./Source/JsonInitial/LoginState";
+import UsuarioVentana from "./Source/UsuarioVentana";
 
 
 class App extends Component {
@@ -10,7 +12,8 @@ class App extends Component {
 
         this.state = {
             idUsuario: "",
-            Autorizado: false
+            Autorizado: false,
+            tipo_usuario: ""
         };
     }
 
@@ -25,7 +28,13 @@ class App extends Component {
     render(){
         if(!this.state.Autorizado)
             return <Login buttonClick={this.UsuarioClick}/>
-        return <AdministradorVentana/>
+        switch (this.state.tipo_usuario) {
+            case dataLogin.tipo_usuario[0]:
+                return <UsuarioVentana idUsuario={this.state.idUsuario}/>;
+            case dataLogin.tipo_usuario[1]:
+                return <AdministradorVentana idUsuario={this.state.idUsuario} />;
+
+        }
     }
 
 }

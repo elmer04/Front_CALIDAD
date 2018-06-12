@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EESSList = ({eess=[],colores}) =>
+const EESSList = ({eess=[],colores,clickEess}) =>
     <div>
         {
             eess.map((val,key)=>{
@@ -10,9 +10,10 @@ const EESSList = ({eess=[],colores}) =>
                 width: '200px',
                 backgroundColor: color.color,
                 padding: '15px',
-                margin: '20px'
+                margin: '20px',
+                borderStyle:'outset'
             };
-            return <label style={styles} key={key}>
+            return <label style={styles} key={key} onClick={()=>clickEess(val.renaes)}>
                 {val.nombre}
             </label>
             })

@@ -6,3 +6,20 @@
 .titulo {
     text-align: center;
 }
+
+.Pos_Not_Found{
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    padding: .5em;
+    flex-basis: calc(100% - 1em);
+    background-color: burlywood;
+    box-shadow: 3px 3px 8px 1px #b2b2b2;
+    border: 2px solid #e5e5e5;
+    margin: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.Pos_Not_Found_texto{
+    text-align: center;
+}

@@ -32,7 +32,7 @@ class Login extends Component {
             <div className="Login">
                 <form onSubmit={this.handleSubmit}>
                     <FormGroup controlId="username" bsSize="large">
-                        <ControlLabel>Email</ControlLabel>
+                        <ControlLabel>Usuario</ControlLabel>
                         <FormControl
                             autoFocus
                             type="username"
@@ -41,7 +41,7 @@ class Login extends Component {
                         />
                     </FormGroup>
                     <FormGroup controlId="password" bsSize="large">
-                        <ControlLabel>Password</ControlLabel>
+                        <ControlLabel>Contraseña</ControlLabel>
                         <FormControl
                             value={this.state.password}
                             onChange={this.handleChange}
@@ -54,7 +54,7 @@ class Login extends Component {
                         disabled={!this.validateForm()}
                         type="submit"
                     >
-                        Login
+                        Entrar
                     </Button>
                 </form>
             </div>

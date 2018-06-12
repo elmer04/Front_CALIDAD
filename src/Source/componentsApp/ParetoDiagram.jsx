@@ -42,7 +42,9 @@ class ParetoDiagram extends Component {
         const node = this.node;
         let w  = node.clientWidth;
         let h = w * 500 / 960;
-        let pData = this.convertDataToPareto(dataFeik);
+        let pData = this.convertDataToPareto(this.props.data);
+        //let pData = this.convertDataToPareto(dataFeik);
+
 
         console.log(h,w)
 

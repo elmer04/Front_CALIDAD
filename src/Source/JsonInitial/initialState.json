@@ -330,6 +330,8 @@
       "direccion": "Mi casa",
       "renaes": "000005814",
       "diris_iddiris": 1,
+      "latitud": null,
+      "longitud": null,
       "metricas":[
         {
           "idindicador":1,
@@ -350,6 +352,23 @@
           "porcentaje":50.40
         }
       ]
+    },
+    "user":{
+      "usuario": {
+        "idusuario": 1,
+        "nombre": "Ruth",
+        "apellido_paterno": "Merino",
+        "apellido_materno": "Merino",
+        "user": "usuaria",
+        "password": "peves",
+        "correo": "usuaria@hotmail.com",
+        "tipo": 1
+      },
+      "diris": {
+        "iddiris": 1,
+        "nombre": "Ruth Merino",
+        "usuario_idusuario": 1
+      }
     }
 }
 

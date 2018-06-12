@@ -8,7 +8,7 @@ import './CssComponents/ListaPosta.css'
 
 const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1,listarOnClick,
                         listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,buscarTextChange,
-                        OrdenChange}) =>
+                        OrdenChange,eessClick}) =>
 <Grid>
     <Panel bsStyle="primary">
         <Panel.Heading>Buscar Por : </Panel.Heading>
@@ -40,7 +40,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
                         <RadioButtons valores={filtroResultado} radioChange={OrdenChange}/>
                     </div>
                 </Col>
-                <EESSList eess={eess} colores={valoresButton1}/>
+                <EESSList eess={eess} colores={valoresButton1} clickEess={eessClick}/>
             </Row>
         </Panel.Body>
     </Panel>
