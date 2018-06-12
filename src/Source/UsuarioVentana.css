@@ -1,29 +1,28 @@
-.AdministradorVentana {
+.UsuarioVentana {
     text-align: center;
 }
 
-.AdministradorVentana-logo {
-    animation: AdministradorVentana-logo-spin infinite 20s linear;
-    height: 80px;
+.UsuarioVentana-logo {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
 }
 
-.AdministradorVentana-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
+.UsuarioVentana-header {
+    text-align: center;
 }
 
-.AdministradorVentana-title {
+.UsuarioVentana-title {
     font-size: 1.5em;
 }
 
-.AdministradorVentana-intro {
+.UsuarioVentana-intro {
     font-size: large;
 }
 
 
-@keyframes AdministradorVentana-logo-spin {
+@keyframes UsuarioVentana-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }

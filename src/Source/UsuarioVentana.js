@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from './Imagenes/logo.svg'
+import logo from './Imagenes/LOGO.jpg'
 import './UsuarioVentana.css'
 import './componentsApp/CssComponents/ModalResponsive.css'
 import {Tab, Tabs,Alert} from 'react-bootstrap'
@@ -15,7 +15,7 @@ class UsuarioVentana extends Component {
         super(...props)
         this.state = {
             //view: 1,
-            user:'',
+            user:dataInitial.user,
             metricas:dataInitial.valoresMetricas,
             eess: dataInitial.eess,
             //rawData: dataInitial.rawdataInitial,
@@ -36,7 +36,8 @@ class UsuarioVentana extends Component {
     }
 
 //CAMBIOS STEVE
-    async componentDidMount(){
+    //async
+    componentDidMount(){
         //RECUPERAR LAS METRICAS
 
         api.get('datosmetricas/metricas').then( res => {
@@ -44,7 +45,8 @@ class UsuarioVentana extends Component {
                 metricas: res.data
             })
         })
-        await api.get(`usuario/getUser/${this.props.idUsuario}`).then( res => {
+        //await
+            api.get(`usuario/getUser/${this.props.idUsuario}`).then( res => {
             console.log(res.data)
             this.setState({
                 user: res.data
@@ -65,7 +67,7 @@ class UsuarioVentana extends Component {
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
                 console.log(1)
-                api.get(`eess/renaes/${this.state.buscarText}`).then(res =>
+                api.get(`eess/renaes/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
                     {
                         this.setState({posta:res.data,openModal:true})
                     }
@@ -76,7 +78,7 @@ class UsuarioVentana extends Component {
                 break;
             case dataInitial.BoxBuscar[1]:
                 console.log(2)
-                api.get(`eess/nombre/${this.state.buscarText}`).then(res =>
+                api.get(`eess/nombre/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
                     {
                         this.setState({posta:res.data,openModal:true})
                     }
@@ -89,12 +91,12 @@ class UsuarioVentana extends Component {
     escogerNivel=()=>{
         if(this.state.selectListar=='total') {
             //console.log('estoy en lista 1');
-            api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}`).then(res => {
+            api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}`).then(res => {
                 this.setState({eess: res.data})
             })
         }else {
             //console.log('estoy en listar 2');
-            api.get(`eess/eessMetricaColor/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
+            api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
                 this.setState({eess: res.data})
             })
         }
@@ -135,7 +137,7 @@ class UsuarioVentana extends Component {
     }
 
     eessClick = (renaes) =>{
-        api.get(`eess/renaes/${renaes}`).then(res =>
+        api.get(`eess/renaes/${this.state.user.diris.iddiris}/${renaes}`).then(res =>
             {
                 this.setState({posta:res.data,openModal:true})
             }
@@ -146,10 +148,9 @@ class UsuarioVentana extends Component {
 
     render() {
         return (
-            <div className="AdministradorVentana">
-                <header className="AdministradorVentana-header">
-                    <img src={logo} className="AdministradorVentana-logo" alt="logo"/>
-                    <h1 className="AdministradorVentana-title">MODULO de Usuario</h1>
+            <div className="UsuarioVentana">
+                <header className="UsuarioVentana-header">
+                    <img src={logo} className="UsuarioVentana-logo" alt="logo"/>
                 </header>
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
                                 valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}

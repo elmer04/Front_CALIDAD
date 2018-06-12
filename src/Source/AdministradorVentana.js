@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import logo from './Imagenes/logo.svg'
+import logo from './Imagenes/LOGO.jpg'
 import './AdministradorVentana.css'
 import {Tab, Tabs,Alert} from 'react-bootstrap'
+import {Grid,Row} from 'react-bootstrap'
 import XLSX from 'xlsx'
 import dataInitial from './JsonInitial/initialState'
 import api from './ComponentsSpecials/api'
@@ -281,22 +282,26 @@ class AdministradorVentana extends Component {
   render() {
       return (
           <div className="AdministradorVentana">
-              <header className="AdministradorVentana-header">
-                  <img src={logo} className="AdministradorVentana-logo" alt="logo"/>
-                  <h1 className="AdministradorVentana-title">MODULO de Administrador</h1>
-              </header>
-              <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-                  <Tab eventKey={1} title="Registro de métricas">
-                    <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}
-                                      editable={this.state.metricaEnable} onClickEditar={this.enableRM}
-                                        changeEditar={this.handleChangeRM} onClickGuardar={this.saveChanges}/>
-                  </Tab>
-                  <Tab eventKey={2} title="Subir Excel">
-                    <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas}
-                                postMes={this.postMes} parse={(this.parse)}/>
-                  </Tab>
-              </Tabs>
-
+              <Grid>
+                  <Row>
+                      <header className="AdministradorVentana-header">
+                          <img src={logo} className="AdministradorVentana-logo" alt="logo"/>
+                      </header>
+                  </Row>
+                  <Row>
+                      <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+                          <Tab eventKey={1} title="Registro de métricas">
+                            <RegistroMetricas texto={"Lista de Métricas"} valores={this.state.metricas}
+                                              editable={this.state.metricaEnable} onClickEditar={this.enableRM}
+                                                changeEditar={this.handleChangeRM} onClickGuardar={this.saveChanges}/>
+                          </Tab>
+                          <Tab eventKey={2} title="Subir Excel">
+                            <SubirExcel rawData={this.state.rawData} metricas={this.state.metricas}
+                                        postMes={this.postMes} parse={(this.parse)}/>
+                          </Tab>
+                      </Tabs>
+                  </Row>
+              </Grid>
           </div>
       )
   }
