@@ -25,7 +25,6 @@ const Map = compose(
                 <InfoWindow onCloseClick ={props.onToggleOpen}>
                     <div>
                         {nombre}
-
                     </div>
                 </InfoWindow>
             </Marker>}
