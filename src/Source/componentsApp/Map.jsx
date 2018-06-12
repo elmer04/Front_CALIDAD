@@ -11,26 +11,25 @@ const Map = compose(
     }),
     withScriptjs,
     withGoogleMap
-    )((props) =>
+    )(({lat=-12.0803712,lng=-77.0981714,nombre='feik',onMarkerClick,zoom=15,...props}) =>
         <GoogleMap
-            defaultZoom={15}
-             defaultCenter={{lat: -12.053232, lng: -77.085899}}
+            defaultZoom={zoom}
+             defaultCenter={{lat: lat, lng: lng}}
         >
-
             {props.isMarkerShown &&
             <Marker
-                position={{lat: -12.053232, lng: -77.085899}}
-                onClick={props.onToggleOpen}
+                position={{lat: lat, lng: lng}}
+                onClick={onMarkerClick}
             >
                 <InfoWindow onCloseClick ={props.onToggleOpen}>
                     <div>
-                        {"San Marcos"}
+                        {nombre}
 
                     </div>
                 </InfoWindow>
-            </Marker>
-            }
+            </Marker>}
+            
         </GoogleMap>
     )
 
-    export default Map
+export default Map
