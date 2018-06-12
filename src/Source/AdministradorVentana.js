@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import logo from './Imagenes/LOGO.jpg'
 import './AdministradorVentana.css'
-import {Tab, Tabs,Alert} from 'react-bootstrap'
+import {Tab, Tabs,Alert,Button} from 'react-bootstrap'
 import {Grid,Row} from 'react-bootstrap'
 import XLSX from 'xlsx'
 import dataInitial from './JsonInitial/initialState'
 import api from './ComponentsSpecials/api'
+import App from "../App.js"
 import SubirExcel from "./componentsApp/SubirExcel"
 import RegistroMetricas from "./componentsApp/RegistroMetricas"
 
@@ -28,6 +29,7 @@ class AdministradorVentana extends Component {
           //posta : dataInitial.posta,
           //niveles: dataInitial.Niveles,
           //max_min : true,
+          sesion:true,
       }
 
       this.parse = this.parse.bind(this);
@@ -279,7 +281,13 @@ class AdministradorVentana extends Component {
       return handleFile(XLSXObject)
   }
 
+  cerrarSesion=()=>{
+      this.setState({sesion:false})
+  }
+
+
   render() {
+      if(this.state.sesion)
       return (
           <div className="AdministradorVentana">
               <Grid>
@@ -287,6 +295,9 @@ class AdministradorVentana extends Component {
                       <header className="AdministradorVentana-header">
                           <img src={logo} className="AdministradorVentana-logo" alt="logo"/>
                       </header>
+                  </Row>
+                  <Row className="row_boton_cerrar_sesion">
+                      <Button bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesion</Button>
                   </Row>
                   <Row>
                       <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
@@ -304,6 +315,8 @@ class AdministradorVentana extends Component {
               </Grid>
           </div>
       )
+      else
+          return <App/>
   }
 }
 

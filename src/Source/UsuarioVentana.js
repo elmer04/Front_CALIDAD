@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import logo from './Imagenes/LOGO.jpg'
 import './UsuarioVentana.css'
 import './componentsApp/CssComponents/ModalResponsive.css'
-import {Tab, Tabs,Alert} from 'react-bootstrap'
+import {Button,Tab, Tabs,Alert} from 'react-bootstrap'
+import {Row,Grid} from 'react-bootstrap'
 import Modal from 'react-responsive-modal'
 import dataInitial from './JsonInitial/initialState'
 import api from './ComponentsSpecials/api'
 import ListaPosta from "./componentsApp/ListaPosta"
 import DescripcionPosta from "./componentsApp/DescripcionPosta"
+import Notes from "./componentsApp/Notes"
+import App from "../App.js"
+import Login from "./Login";
+import GridSave from "./componentsApp/GridSave";
 
 
 class UsuarioVentana extends Component {
@@ -31,6 +36,7 @@ class UsuarioVentana extends Component {
             niveles: dataInitial.Niveles,
             max_min : true,
             openModal : false,
+            sesion:true,
 
         }
     }
@@ -146,12 +152,21 @@ class UsuarioVentana extends Component {
         )
     }
 
+    cerrarSesion=()=>{
+        this.setState({sesion:false})
+    }
+
     render() {
+        if(this.state.sesion)
         return (
             <div className="UsuarioVentana">
                 <header className="UsuarioVentana-header">
                     <img src={logo} className="UsuarioVentana-logo" alt="logo"/>
                 </header>
+                <Grid>
+                    <Row className="row_boton_cerrar_sesion">
+                        <Button bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesion</Button>
+                    </Row>
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
                                 valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
                                 valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
@@ -166,8 +181,12 @@ class UsuarioVentana extends Component {
                                           metricas={this.state.metricas} />
 
                     </Modal>
+                    <Notes/>
+                </Grid>
             </div>
         )
+        else
+            return (<App/>)
     }
 }
 

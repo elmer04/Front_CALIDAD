@@ -21,6 +21,10 @@
   font-size: large;
 }
 
+.row_boton_cerrar_sesion{
+  text-align: right;
+}
+
 
 @keyframes AdministradorVentana-logo-spin {
   from { transform: rotate(0deg); }
