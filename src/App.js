@@ -4,7 +4,6 @@ import AdministradorVentana from "./Source/AdministradorVentana";
 import api from "./Source/ComponentsSpecials/api";
 import dataLogin from "./Source/JsonInitial/LoginState";
 import UsuarioVentana from "./Source/UsuarioVentana";
-import Notes from './Source/componentsApp/Notes';
 
 
 class App extends Component {
@@ -27,7 +26,6 @@ class App extends Component {
     }
 
     render(){
-        /*
         if(!this.state.Autorizado)
             return <Login buttonClick={this.UsuarioClick}/>
         switch (this.state.tipo_usuario) {
@@ -35,9 +33,8 @@ class App extends Component {
                 return <UsuarioVentana idUsuario={this.state.idUsuario}/>;
             case dataLogin.tipo_usuario[1]:
                 return <AdministradorVentana idUsuario={this.state.idUsuario} />;
-*/
-            return <div><Notes/></div>
-        
+
+        }
     }
 
 }
