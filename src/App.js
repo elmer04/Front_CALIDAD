@@ -11,9 +11,9 @@ class App extends Component {
         super(...props);
 
         this.state = {
-            idUsuario: "1",
+            idUsuario: "",
             Autorizado: false,
-            tipo_usuario: "administrador"
+            tipo_usuario: ""
         };
     }
 
@@ -26,10 +26,8 @@ class App extends Component {
     }
 
     render(){
-        /*
         if(!this.state.Autorizado)
             return <Login buttonClick={this.UsuarioClick}/>
-        */
         switch (this.state.tipo_usuario) {
             case dataLogin.tipo_usuario[0]:
                 return <UsuarioVentana idUsuario={this.state.idUsuario}/>;
