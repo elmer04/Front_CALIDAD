@@ -3,12 +3,12 @@ import {Panel,Button} from 'react-bootstrap'
 import { Grid ,Row,Col} from 'react-bootstrap'
 import {LabelTextArea} from "./ComponentesAux";
 import "./CssComponents/RegistroMetricas.css";
-
+import "./CssComponents/Panel.css";
 
 
 const RegistroMetricas = ({texto,valores,editable,onClickEditar,onClickGuardar,changeEditar}) =>
     <Grid>
-        <Panel bsStyle="primary">
+        <Panel bsStyle="primary" className="panel_p">
             <Panel.Heading>{texto} </Panel.Heading>
             <Panel.Body>
                 {
