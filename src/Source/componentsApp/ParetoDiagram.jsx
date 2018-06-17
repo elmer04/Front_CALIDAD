@@ -46,7 +46,7 @@ class ParetoDiagram extends Component {
         //let pData = this.convertDataToPareto(dataFeik);
 
 
-        console.log(h,w)
+        //console.log(h,w)
 
         let xScale = d3.scaleBand().rangeRound([0,w]).padding(0.1);
         xScale.domain(pData.map(d=>d.mini))

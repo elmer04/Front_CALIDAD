@@ -20,6 +20,7 @@ class UsuarioVentana extends Component {
         super(...props)
         this.state = {
             //view: 1,
+            idUsuario:(typeof this.props.idUsuario==='undefined' || this.props.idUsuario==='' )?1:this.props.idUsuario,
             user:dataInitial.user,
             metricas:dataInitial.valoresMetricas,
             eess: dataInitial.eess,
@@ -46,25 +47,18 @@ class UsuarioVentana extends Component {
     //async
     componentDidMount(){
         //RECUPERAR LAS METRICAS
-
-        api.get('datosmetricas/metricas').then( res => {
-            this.setState({
-                metricas: res.data
-            })
+        api.get('datosmetricas/metricas').then( resMetrica => {
+            console.log( this.props.idUsuario);
+            this.setState({metricas: resMetrica.data})
         })
-        //await
-        api.get(`usuario/getUser/${this.props.idUsuario}`).then( res => {
-            //console.log(res.data)
-            this.setState({
-                user: res.data
-            })
-        })
-        api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/1`).then(res =>{
+        api.get(`usuario/getUser/${this.state.idUsuario}`).then( resUser => {
+            this.setState({user: resUser.data})
+            api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/1`).then(resEess =>{
                 this.setState({
-                    eess: res.data
+                    eess: resEess.data
                 })
+            })
         })
-
     }
 
 //FUNCIONE STEVE
@@ -75,20 +69,18 @@ class UsuarioVentana extends Component {
             case dataInitial.BoxBuscar[0]:
                 api.get(`eess/renaes/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
                     {
+
                         this.setState({posta:res.data,openModal:true})
                     }
-                ).catch(
-                    console.log("NO EXISTE CENTRO DE SALUD")
                 )
 
                 break;
             case dataInitial.BoxBuscar[1]:
                 api.get(`eess/nombre/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
                     {
+
                         this.setState({posta:res.data,openModal:true})
                     }
-                ).catch(
-                    console.log("NO EXISTE CENTRO DE SALUD")
                 )
         }
     }
@@ -141,20 +133,20 @@ class UsuarioVentana extends Component {
         this.setState({openModal:false})
         let fecha=this.state.posta.metricas[0].idfecha
         let valores=[]
-        let valor={}
-        console.log(this.state.notas)
         let anotacionDisable=false;
+        this.state.notas.map(note => {
+            delete note.editorState;
+        });
         this.state.notas.map(nota=>{
                 anotacionDisable=((typeof nota.text === 'undefined') || (nota.text==''))
-                valor['titulo']=nota.title;
-                valor['anotacion']=nota.text;
-                valor['contenido']=nota;
+                //console.log(anotacionDisable)
                 if(!anotacionDisable)
-                    valores.push(valor)
+                    valores.push({titulo:nota.title,
+                                    anotacion:nota.text,
+                                    contenido:nota})
             }
         )
-        console.log(valores)
-        console.log(this.state.posta.idEESS)
+        //console.log(valores)
         api.post(`eess/notas/${this.state.posta.idEESS}/${fecha}`,valores)
     }
 
@@ -163,9 +155,18 @@ class UsuarioVentana extends Component {
     }
 
     eessClick = (renaes) =>{
-        api.get(`eess/renaes/${this.state.user.diris.iddiris}/${renaes}`).then(res =>
+        api.get(`eess/renaes/${this.state.user.diris.iddiris}/${renaes}`).then(res1 =>
             {
-                this.setState({posta:res.data,openModal:true})
+                let fecha=res1.data.metricas[0].idfecha
+                api.get(`eess/notas/${res1.data.idEESS}/${fecha}`).then(res2=> {
+                        let notitas=res2.data.map(dato=>
+                            JSON.parse(dato.contenido))
+                        notitas.map(nota=>
+                            delete nota.editorState
+                        )
+                        this.setState({posta:res1.data,notas: notitas,openModal:true})
+                    }
+                )
             }
         )
     }

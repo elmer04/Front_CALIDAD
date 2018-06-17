@@ -96,7 +96,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Notas</Panel.Heading>
                     <Panel.Body>
-                        <Notes notas={notas} onChangeNotes={onChangeNotas}/>
+                        <Notes notes={notas} onChangeNotes={onChangeNotas}/>
                     </Panel.Body>
                 </Panel>
             </Col>
