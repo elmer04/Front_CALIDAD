@@ -6,6 +6,7 @@ import { Grid,Row,Col } from 'react-bootstrap'
 import ParetoDiagram from './ParetoDiagram'
 import Map from './Map'
 import './CssComponents/DescripcionPosta.css'
+import Notes from "./Notes";
 
 let convertir_data=(data)=>{
       let data2=[];
@@ -21,7 +22,7 @@ let convertir_data=(data)=>{
 
 
 
-const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
+const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
     <Grid>
         <Row>
             <h1 className="titulo">{posta.nombre}</h1>
@@ -86,6 +87,16 @@ const DescripcionPosta = ({posta,fechaultima,fechaproxima,metricas,colores}) =>
                     <Panel.Heading>Diagrama de Pareto</Panel.Heading>
                     <Panel.Body>
                         <ParetoDiagram data={convertir_data(posta.metricas)} size={[400,400]} />
+                    </Panel.Body>
+                </Panel>
+            </Col>
+        </Row>
+        <Row>
+            <Col>
+                <Panel bsStyle="primary">
+                    <Panel.Heading>Notas</Panel.Heading>
+                    <Panel.Body>
+                        <Notes notas={notas} onChangeNotes={onChangeNotas}/>
                     </Panel.Body>
                 </Panel>
             </Col>

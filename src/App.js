@@ -12,8 +12,8 @@ class App extends Component {
 
         this.state = {
             idUsuario: "",
-            Autorizado: false,
-            tipo_usuario: ""
+            Autorizado: true,
+            tipo_usuario: "usuario"
         };
     }
 

@@ -323,7 +323,7 @@
     }
   ],
   "posta":{
-      "ideess": 96,
+      "idEESS": 96,
       "nombre": "C.S.M.I. ANCON",
       "tipo": "1",
       "gerente": "Steve",
@@ -337,19 +337,22 @@
           "idindicador":1,
           "nombre":"metrica 1",
           "color":"rojo",
-          "porcentaje":30.40
+          "porcentaje":30.40,
+          "idfecha":12
         },
         {
           "idindicador":2,
           "nombre":"metrica 2",
           "color":"verde",
-          "porcentaje":60.40
+          "porcentaje":60.40,
+          "idfecha":12
         },
         {
           "idindicador":3,
           "nombre":"metrica 3",
           "color":"amarillo",
-          "porcentaje":50.40
+          "porcentaje":50.40,
+          "idfecha":12
         }
       ]
     },

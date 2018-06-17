@@ -9,10 +9,10 @@ import dataInitial from './JsonInitial/initialState'
 import api from './ComponentsSpecials/api'
 import ListaPosta from "./componentsApp/ListaPosta"
 import DescripcionPosta from "./componentsApp/DescripcionPosta"
-import Notes from "./componentsApp/Notes"
 import App from "../App.js"
 import Login from "./Login";
 import GridSave from "./componentsApp/GridSave";
+import Notes from "./componentsApp/Notes";
 
 
 class UsuarioVentana extends Component {
@@ -34,6 +34,7 @@ class UsuarioVentana extends Component {
             selectMetricaListar : 1,
             posta : dataInitial.posta,
             niveles: dataInitial.Niveles,
+            notas:[],
             max_min : true,
             openModal : false,
             sesion:true,
@@ -52,8 +53,8 @@ class UsuarioVentana extends Component {
             })
         })
         //await
-            api.get(`usuario/getUser/${this.props.idUsuario}`).then( res => {
-            console.log(res.data)
+        api.get(`usuario/getUser/${this.props.idUsuario}`).then( res => {
+            //console.log(res.data)
             this.setState({
                 user: res.data
             })
@@ -72,7 +73,6 @@ class UsuarioVentana extends Component {
     buscarPorClick=()=>{
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
-                console.log(1)
                 api.get(`eess/renaes/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
                     {
                         this.setState({posta:res.data,openModal:true})
@@ -83,7 +83,6 @@ class UsuarioVentana extends Component {
 
                 break;
             case dataInitial.BoxBuscar[1]:
-                console.log(2)
                 api.get(`eess/nombre/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
                     {
                         this.setState({posta:res.data,openModal:true})
@@ -140,6 +139,27 @@ class UsuarioVentana extends Component {
 
     onCloseModal = () =>{
         this.setState({openModal:false})
+        let fecha=this.state.posta.metricas[0].idfecha
+        let valores=[]
+        let valor={}
+        console.log(this.state.notas)
+        let anotacionDisable=false;
+        this.state.notas.map(nota=>{
+                anotacionDisable=((typeof nota.text === 'undefined') || (nota.text==''))
+                valor['titulo']=nota.title;
+                valor['anotacion']=nota.text;
+                valor['contenido']=nota;
+                if(!anotacionDisable)
+                    valores.push(valor)
+            }
+        )
+        console.log(valores)
+        console.log(this.state.posta.idEESS)
+        api.post(`eess/notas/${this.state.posta.idEESS}/${fecha}`,valores)
+    }
+
+    onChangeNotas = (notas) =>{
+        this.setState({notas})
     }
 
     eessClick = (renaes) =>{
@@ -147,8 +167,6 @@ class UsuarioVentana extends Component {
             {
                 this.setState({posta:res.data,openModal:true})
             }
-        ).catch(
-            console.log("NO EXISTE CENTRO DE SALUD")
         )
     }
 
@@ -176,12 +194,11 @@ class UsuarioVentana extends Component {
                                 eessClick={this.eessClick}/>
                     <Modal open={this.state.openModal} onClose={this.onCloseModal}
                            classNames={{ modal:'custom-modal'}}>
-                        <DescripcionPosta posta={this.state.posta} fechaultima={["12","34","34"]}
-                                          fechaproxima ={["12","34","34"]} colores={this.state.niveles}
-                                          metricas={this.state.metricas} />
+                        <DescripcionPosta posta={this.state.posta} colores={this.state.niveles}
+                                          metricas={this.state.metricas} notas={this.state.notas}
+                                          onChangeNotas={this.onChangeNotas}/>
 
                     </Modal>
-                    <Notes/>
                 </Grid>
             </div>
         )
