@@ -35,8 +35,8 @@ export const BoxInput = ({valoresBox,BoxChange,TextChange}) =>{
 }
 
 
-export const LabelBox = ({texto,valoresBox=[],onChangeBox,mdTexto=2,mdTextoOffset=2,
-                             mdBox=4,mdBoxOffset=0}) => {
+export const LabelBox = ({texto,valoresBox=[],onChangeBox=f=>f,mdTexto=2,mdTextoOffset=2,
+                             mdBox=4,mdBoxOffset=0,valueId="idindicador",nombreId="nombre"}) => {
 
     let handleOptionChange = (changeEvent) => {
         let valorRadio = changeEvent.target.value
@@ -50,7 +50,7 @@ export const LabelBox = ({texto,valoresBox=[],onChangeBox,mdTexto=2,mdTextoOffse
             <FormControl componentClass="select" placeholder="select" onChange={handleOptionChange}>
                 {
                     valoresBox.map((valor,key) => {
-                        return <option value={valor.idindicador} key={key}>{valor.nombre}</option>
+                        return <option value={valor[valueId]} key={key}>{valor[nombreId]}</option>
                     })
                 }
             </FormControl>

@@ -22,7 +22,8 @@ let convertir_data=(data)=>{
 
 
 
-const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
+const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onChangeFecha,
+                              paretoCambio,notasCambio}) =>
     <Grid>
         <Row>
             <h1 className="titulo">{posta.nombre}</h1>
@@ -62,7 +63,8 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Fecha</Panel.Heading>
                     <Panel.Body>
-                        <LabelBox texto="Fecha" mdBoxOffset={2}/>
+                        <LabelBox texto="Fecha" mdBoxOffset={2} valoresBox={fechas}
+                                  valueId={"idfecha"} nombreId={"fecha"} onChangeBox={onChangeFecha}/>
                     </Panel.Body>
                 </Panel>
                 <Panel bsStyle="primary">
@@ -70,6 +72,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
                     <Panel.Body>
                         {
                             metricas.map((metrica,key)=> {
+
                                 let tipocolor=posta.metricas.find(metrica1 => metrica1.idindicador===metrica.idindicador)
 
                                 let color=(typeof tipocolor === 'undefined') ? '':tipocolor.color
@@ -92,7 +95,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Diagrama de Pareto</Panel.Heading>
                     <Panel.Body>
-                        <ParetoDiagram data={convertir_data(posta.metricas)} size={[400,400]} />
+                        {paretoCambio?null:<ParetoDiagram data={convertir_data(posta.metricas)} size={[400,400]} />}
                     </Panel.Body>
                 </Panel>
             </Col>
@@ -102,7 +105,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
                 <Panel bsStyle="primary">
                     <Panel.Heading>Notas</Panel.Heading>
                     <Panel.Body>
-                        <Notes notes={notas} onChangeNotes={onChangeNotas}/>
+                        {notasCambio?null:<Notes notes={notas} onChangeNotes={onChangeNotas}/>}
                     </Panel.Body>
                 </Panel>
             </Col>

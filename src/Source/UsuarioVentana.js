@@ -36,10 +36,11 @@ class UsuarioVentana extends Component {
             posta : dataInitial.posta,
             niveles: dataInitial.Niveles,
             notas:[],
+            fechas:[],
             max_min : true,
             openModal : false,
             sesion:true,
-
+            cambioModal:false,
         }
     }
 
@@ -48,16 +49,18 @@ class UsuarioVentana extends Component {
     componentDidMount(){
         //RECUPERAR LAS METRICAS
         api.get('datosmetricas/metricas').then( resMetrica => {
-            console.log( this.props.idUsuario);
             this.setState({metricas: resMetrica.data})
         })
         api.get(`usuario/getUser/${this.state.idUsuario}`).then( resUser => {
             this.setState({user: resUser.data})
-            api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/1`).then(resEess =>{
+            api.get(`eess/eessMetricaColor/${resUser.data.diris.iddiris}/1`).then(resEess =>{
                 this.setState({
                     eess: resEess.data
                 })
             })
+        })
+        api.get('datosmetricas/fechas').then(res=>{
+            this.setState({fechas:res.data})
         })
     }
 
@@ -185,6 +188,25 @@ class UsuarioVentana extends Component {
         this.setState({sesion:false})
     }
 
+    changeMesYear=(idfecha)=>{
+        this.setState({cambioModal:true})
+        api.get(`eess/eessMetricaColorFecha/${this.state.posta.idEESS}/${idfecha}`).then(res => {
+            this.setState(prevDefault=>({
+                posta:{...prevDefault.posta,metricas:res.data},
+                cambioModal:false
+            }))
+        })
+        api.get(`eess/notas/${this.state.posta.idEESS}/${idfecha}`).then(res2=> {
+                let notitas=res2.data.map(dato=>
+                    JSON.parse(dato.contenido))
+                notitas.map(nota=>
+                    delete nota.editorState
+                )
+                this.setState({notas: notitas})
+            }
+        )
+    }
+
     render() {
         if(this.state.sesion)
         return (
@@ -207,7 +229,9 @@ class UsuarioVentana extends Component {
                            classNames={{ modal:'custom-modal'}}>
                         <DescripcionPosta posta={this.state.posta} colores={this.state.niveles}
                                           metricas={this.state.metricas} notas={this.state.notas}
-                                          onChangeNotas={this.onChangeNotas}/>
+                                          fechas={this.state.fechas}
+                                          onChangeNotas={this.onChangeNotas} onChangeFecha={this.changeMesYear}
+                                          paretoCambio={this.state.cambioModal} notasCambio={this.state.cambioModal}/>
 
                     </Modal>
                 </Grid>
