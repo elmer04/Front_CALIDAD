@@ -63,25 +63,48 @@ class UsuarioVentana extends Component {
 
 //FUNCIONE STEVE
 
+    buscarPorRenaes=(renaes)=>{
+        api.get(`eess/renaes/${this.state.user.diris.iddiris}/${renaes}`).then(res1 =>
+            {
+                let fecha=res1.data.metricas[0].idfecha
+                api.get(`eess/notas/${res1.data.idEESS}/${fecha}`).then(res2=> {
+                        let notitas=res2.data.map(dato=>
+                            JSON.parse(dato.contenido))
+                        notitas.map(nota=>
+                            delete nota.editorState
+                        )
+                        this.setState({posta:res1.data,notas: notitas,openModal:true})
+                    }
+                )
+                this.setState({posta:res1.data,openModal:true})
+            }
+        )
+    }
+    buscarPorNombre=(nombre)=>{
+        api.get(`eess/nombre/${this.state.user.diris.iddiris}/${nombre}`).then(res1 =>
+            {
+                let fecha=res1.data.metricas[0].idfecha
+                api.get(`eess/notas/${res1.data.idEESS}/${fecha}`).then(res2=> {
+                        let notitas=res2.data.map(dato=>
+                            JSON.parse(dato.contenido))
+                        notitas.map(nota=>
+                            delete nota.editorState
+                        )
+                        this.setState({posta:res1.data,notas: notitas,openModal:true})
+                    }
+                )
+                this.setState({posta:res1.data,openModal:true})
+            }
+        )
+    }
 
     buscarPorClick=()=>{
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
-                api.get(`eess/renaes/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
-                    {
-
-                        this.setState({posta:res.data,openModal:true})
-                    }
-                )
-
+                this.buscarPorRenaes(this.state.buscarText)
                 break;
             case dataInitial.BoxBuscar[1]:
-                api.get(`eess/nombre/${this.state.user.diris.iddiris}/${this.state.buscarText}`).then(res =>
-                    {
-
-                        this.setState({posta:res.data,openModal:true})
-                    }
-                )
+                this.buscarPorNombre(this.state.buscarText)
         }
     }
 
@@ -154,21 +177,8 @@ class UsuarioVentana extends Component {
         this.setState({notas})
     }
 
-    eessClick = (renaes) =>{
-        api.get(`eess/renaes/${this.state.user.diris.iddiris}/${renaes}`).then(res1 =>
-            {
-                let fecha=res1.data.metricas[0].idfecha
-                api.get(`eess/notas/${res1.data.idEESS}/${fecha}`).then(res2=> {
-                        let notitas=res2.data.map(dato=>
-                            JSON.parse(dato.contenido))
-                        notitas.map(nota=>
-                            delete nota.editorState
-                        )
-                        this.setState({posta:res1.data,notas: notitas,openModal:true})
-                    }
-                )
-            }
-        )
+    eessClick = (nombre) =>{
+        this.buscarPorNombre(nombre)
     }
 
     cerrarSesion=()=>{

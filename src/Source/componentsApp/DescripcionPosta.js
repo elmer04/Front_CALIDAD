@@ -1,6 +1,6 @@
 import React from 'react';
 //import EESSList from "./EESSList";
-import { LabelCuadritos, LabelLabels, LabelText} from "./ComponentesAux"
+import {LabelBox, LabelCuadritos, LabelLabels, LabelText} from "./ComponentesAux"
 import {Panel,ControlLabel} from 'react-bootstrap'
 import { Grid,Row,Col } from 'react-bootstrap'
 import ParetoDiagram from './ParetoDiagram'
@@ -60,14 +60,20 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas}) =>
             </Col>
             <Col md={6}>
                 <Panel bsStyle="primary">
+                    <Panel.Heading>Fecha</Panel.Heading>
+                    <Panel.Body>
+                        <LabelBox texto="Fecha" mdBoxOffset={2}/>
+                    </Panel.Body>
+                </Panel>
+                <Panel bsStyle="primary">
                     <Panel.Heading>Métricas</Panel.Heading>
                     <Panel.Body>
                         {
-                            metricas.map((metrica)=> {
+                            metricas.map((metrica,key)=> {
                                 let tipocolor=posta.metricas.find(metrica1 => metrica1.idindicador===metrica.idindicador)
 
                                 let color=(typeof tipocolor === 'undefined') ? '':tipocolor.color
-                                return <LabelLabels texto={metrica.nombre} color={color}
+                                return <LabelLabels key={key} texto={metrica.nombre} color={color}
                                                     valoresLabels={colores}/>
                             })
                         }

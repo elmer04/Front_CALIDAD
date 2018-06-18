@@ -35,17 +35,18 @@ export const BoxInput = ({valoresBox,BoxChange,TextChange}) =>{
 }
 
 
-export const LabelBox = ({texto,valoresBox,onChangeBox}) => {
+export const LabelBox = ({texto,valoresBox=[],onChangeBox,mdTexto=2,mdTextoOffset=2,
+                             mdBox=4,mdBoxOffset=0}) => {
 
     let handleOptionChange = (changeEvent) => {
         let valorRadio = changeEvent.target.value
         onChangeBox(valorRadio)
     };
    return ( <FormGroup controlId="formLabelBox">
-        <Col md={2} mdOffset={2}>
+        <Col md={mdTexto} mdOffset={mdTextoOffset}>
             <ControlLabel>{texto}</ControlLabel>
         </Col>
-        <Col md={4}>
+        <Col md={mdBox} mdOffset={mdBoxOffset}>
             <FormControl componentClass="select" placeholder="select" onChange={handleOptionChange}>
                 {
                     valoresBox.map((valor,key) => {
@@ -62,22 +63,24 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
         changeRadio(valorRadio)
     };
 
-    return (<FormGroup controlId="formLabelRadioButton">
-        <Col md={2} mdOffset={2}>
-            <ControlLabel>{texto}</ControlLabel>
-        </Col>
-        <Col md={4}>
-            <FormGroup>
-                {
-                    valoresButton.map((valor,key) => {
-                        return <Radio name="radioGroup1" onChange={handleOptionChange}
-                                          className="radios" value={valor.nombre} key={key}>{valor.nombre}</Radio>
+    return (
+            <FormGroup controlId="formLabelRadioButton">
+                <Col md={2} mdOffset={2}>
+                    <ControlLabel>{texto}</ControlLabel>
+                </Col>
+                <Col md={4}>
+                    <FormGroup>
+                        {
+                            valoresButton.map((valor,key) => {
+                                return <Radio name="radioGroup1" onChange={handleOptionChange}
+                                                  className="radios" value={valor.nombre} key={key}>{valor.nombre}</Radio>
 
-                    })
-                }
+                            })
+                        }
+                    </FormGroup>
+                </Col>
             </FormGroup>
-        </Col>
-    </FormGroup>)
+    )
 }
 
 
@@ -164,16 +167,16 @@ export const LabelLabels = ({texto,color,valoresLabels})=>{
             </Col>
             <Col md={8} >
                 {
-                    valoresLabels.map((valor)=>{
+                    valoresLabels.map((valor,key)=>{
 
                         if(valor.nombre===color) {
-                            return <Col className="labelLabelsdiv" md={md}>
+                            return <Col className="labelLabelsdiv" md={md} key={key}>
                                 <Label className="div_labels" style={{backgroundColor: valor.color}}
-                                       inline>{valor.nombre}</Label>
+                                       >{valor.nombre}</Label>
                             </Col>
                         }else
-                        return  <Col className="labelLabelsdiv" md={md}>
-                                    <Label className="div_labels"  inline>{valor.nombre}</Label>
+                        return  <Col className="labelLabelsdiv" md={md} key={key}>
+                                    <Label className="div_labels" >{valor.nombre}</Label>
                                 </Col>
                     })
                 }

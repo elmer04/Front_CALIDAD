@@ -70,9 +70,9 @@ class ParetoDiagram extends Component {
 
         bar.append('rect').attr('x',d=>xScale(d.mini)).attr('width',xScale.bandwidth()).attr('y',d=>yHist(d.def)).attr('height',d=>h-yHist(d.def));
 
-        let guide = d3.line().x(d=>xScale(d.mini)).y(d=>yCum(d.Acumulado));
+        //let guide = d3.line().x(d=>xScale(d.mini)).y(d=>yCum(d.Acumulado));
 
-        let line = svg.append('path').datum(pData).attr('d',guide).attr('class','line').attr('transform', 'translate(' + xScale.bandwidth()/2 + ',0)')
+        //let line = svg.append('path').datum(pData).attr('d',guide).attr('class','line').attr('transform', 'translate(' + xScale.bandwidth()/2 + ',0)')
 
         svg.append('g').attr('class','x axis').attr('transform','translate(0,'+h+')').call(xAxis)
 

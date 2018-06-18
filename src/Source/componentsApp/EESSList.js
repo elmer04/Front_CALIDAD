@@ -13,7 +13,7 @@ const EESSList = ({eess=[],colores,clickEess}) =>
                 margin: '20px',
                 borderStyle:'outset'
             };
-            return <label style={styles} key={key} onClick={()=>clickEess(val.renaes)}>
+            return <label style={styles} key={key} onClick={()=>clickEess(val.nombre)}>
                 {val.nombre}
             </label>
             })
