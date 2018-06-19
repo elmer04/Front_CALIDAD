@@ -76,7 +76,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
                                 let tipocolor=posta.metricas.find(metrica1 => metrica1.idindicador===metrica.idindicador)
 
                                 let color=(typeof tipocolor === 'undefined') ? '':tipocolor.color
-                                return <LabelLabels key={key} texto={metrica.nombre} color={color}
+                                return <LabelLabels key={key} texto={metrica.diminutivo} color={color}
                                                     valoresLabels={colores}/>
                             })
                         }
@@ -85,7 +85,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
                 <Panel bsStyle="primary">
                     <Panel.Heading>Promedio Métrica</Panel.Heading>
                     <Panel.Body>
-                        <LabelLabels texto="Promedio" valoresLabels={colores}/>
+                        <LabelLabels texto="Promedio" valoresLabels={colores} color={posta.color}/>
                     </Panel.Body>
                 </Panel>
             </Col>

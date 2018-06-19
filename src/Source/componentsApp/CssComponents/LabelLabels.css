@@ -1,6 +1,12 @@
 .div_label{
     font-size: 1.3em;
     display: block;
+    background-color: #777;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-family: sans-serif;
+    border-radius: .25em;
 }
 
 .div_labels{

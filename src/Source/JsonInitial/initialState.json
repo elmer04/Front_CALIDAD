@@ -311,15 +311,18 @@
   "valoresMetricas":[
     {
       "idindicador":1,
-      "nombre":"metrica 1"
+      "nombre":"metrica 1",
+      "diminutivo":"m1"
     },
     {
       "idindicador":2,
-      "nombre":"metrica 2"
+      "nombre":"metrica 2",
+      "diminutivo":"m2"
     },
     {
       "idindicador":3,
-      "nombre":"metrica 3"
+      "nombre":"metrica 3",
+      "diminutivo":"m3"
     }
   ],
   "posta":{
@@ -332,6 +335,8 @@
       "diris_iddiris": 1,
       "latitud": null,
       "longitud": null,
+      "color":"verde",
+      "porcentaje":40.0,
       "metricas":[
         {
           "idindicador":1,

@@ -23,7 +23,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
         <Panel.Heading>Listar Por : </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
-                <LabelBox texto="Metricas" valoresBox={valoresBox2} onChangeBox={listaMetricaChange}/>
+                <LabelBox texto="Metricas" valoresBox={valoresBox2} onChangeBox={listaMetricaChange} nombreId="diminutivo"/>
             </Row>
             <Row className="show-grid">
                 <LabelRadioButton texto="Niveles" valoresButton={valoresButton1} changeRadio={listaChange}/>

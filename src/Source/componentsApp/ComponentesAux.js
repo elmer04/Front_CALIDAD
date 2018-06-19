@@ -87,7 +87,7 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
 export const LabelTextArea = ({texto,value,index,onChangeEditar,disable=false})=> {
     let handleChange= (event) => {
 
-        console.log(event.target.value)
+        //console.log(event.target.value)
         onChangeEditar(event.target.value,index);
     }
 
@@ -163,7 +163,7 @@ export const LabelLabels = ({texto,color,valoresLabels})=>{
     return ( <FormGroup  controlId="formLabelCuadritos">
         <Row>
             <Col md={4}>
-                <Label className="div_label" >{texto}</Label>
+                <p className="div_label" >{texto}</p>
             </Col>
             <Col md={8} >
                 {

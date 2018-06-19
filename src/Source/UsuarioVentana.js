@@ -28,6 +28,7 @@ class UsuarioVentana extends Component {
             BoxBuscar: dataInitial.BoxBuscar,
             BoxNiveles:  dataInitial.BoxNiveles,
             filtroResultado:dataInitial.filtroResultado,
+            BoxMetricas:dataInitial.valoresMetricas,
             //metricaEnable: false,
             buscarPor:dataInitial.BoxBuscar[0],
             buscarText:'',
@@ -49,7 +50,14 @@ class UsuarioVentana extends Component {
     componentDidMount(){
         //RECUPERAR LAS METRICAS
         api.get('datosmetricas/metricas').then( resMetrica => {
-            this.setState({metricas: resMetrica.data})
+            let metricas=resMetrica.data.slice();
+            console.log(metricas)
+            metricas.push({
+                    idindicador:0,
+                    diminutivo:"Promedio",
+                }
+                )
+            this.setState({metricas: resMetrica.data,BoxMetricas:metricas})
         })
         api.get(`usuario/getUser/${this.state.idUsuario}`).then( resUser => {
             this.setState({user: resUser.data})
@@ -112,17 +120,34 @@ class UsuarioVentana extends Component {
     }
 
     escogerNivel=()=>{
-        if(this.state.selectListar=='total') {
-            //console.log('estoy en lista 1');
-            api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}`).then(res => {
-                this.setState({eess: res.data})
-            })
-        }else {
-            //console.log('estoy en listar 2');
-            api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
-                this.setState({eess: res.data})
-            })
+        if(this.state.selectMetricaListar!=0)
+            if(this.state.selectListar=='total') {
+                //console.log('estoy en lista 1');
+                api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}`).then(res => {
+                    this.setState({eess: res.data})
+                })
+            }else {
+                //console.log('estoy en listar 2');
+                api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
+                    this.setState({eess: res.data})
+                })
+            }
+        else{
+            if(this.state.selectListar=='total') {
+                //console.log('estoy en lista 1');
+                console.log("estoy en promedi ocolor")
+                api.get(`eess/eessPromedioColor/${this.state.user.diris.iddiris}`).then(res => {
+                    console.log(res.data)
+                    this.setState({eess: res.data})
+                })
+            }else {
+                //console.log('estoy en listar 2');
+                api.get(`eess/eessPromedioColor/${this.state.user.diris.iddiris}/${this.state.selectListar}`).then(res => {
+                    this.setState({eess: res.data})
+                })
+            }
         }
+
     }
 
     handleBuscarChange=(buscarPor) => {
@@ -191,10 +216,13 @@ class UsuarioVentana extends Component {
     changeMesYear=(idfecha)=>{
         this.setState({cambioModal:true})
         api.get(`eess/eessMetricaColorFecha/${this.state.posta.idEESS}/${idfecha}`).then(res => {
-            this.setState(prevDefault=>({
-                posta:{...prevDefault.posta,metricas:res.data},
-                cambioModal:false
-            }))
+            api.get(`eess/eessFechaColor/${this.state.posta.idEESS}/${idfecha}`).then(res2 =>{
+                this.setState(prevDefault=>({
+                    posta:{...prevDefault.posta,metricas:res.data,color:res2.data.color
+                        ,porcentaje:res2.data.porcentaje},
+                    cambioModal:false
+                }))
+            })
         })
         api.get(`eess/notas/${this.state.posta.idEESS}/${idfecha}`).then(res2=> {
                 let notitas=res2.data.map(dato=>
@@ -219,7 +247,7 @@ class UsuarioVentana extends Component {
                         <Button bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesion</Button>
                     </Row>
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
-                                valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
+                                valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.BoxMetricas}
                                 valoresButton1 ={this.state.BoxNiveles} listarOnClick={this.escogerNivel}
                                 listaChange={this.handleColorChange} listaMetricaChange={this.handleMetricaChange}
                                 buscarPorChange={this.handleBuscarChange} buscarPorClick={this.buscarPorClick}
