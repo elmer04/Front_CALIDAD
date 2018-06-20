@@ -141,7 +141,6 @@ class UsuarioVentana extends Component {
                     this.setState({eess: res.data})
                 })
             }else {
-                //console.log('estoy en listar 2');
                 api.get(`eess/eessPromedioColor/${this.state.user.diris.iddiris}/${this.state.selectListar}`).then(res => {
                     this.setState({eess: res.data})
                 })
