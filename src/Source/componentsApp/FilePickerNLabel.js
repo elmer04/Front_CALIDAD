@@ -1,7 +1,7 @@
 import React from 'react';
 import { FilePicker } from 'react-file-picker'
 import { Button ,Alert} from 'react-bootstrap'
-import "./CssComponents/Button_excel.css";
+import "./CssComponents/Excel.css";
 
 const FilePickerNLabel = ({parse=f=>f,me}) =>
   <div>

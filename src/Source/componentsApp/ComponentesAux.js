@@ -94,10 +94,10 @@ export const LabelTextArea = ({texto,value,index,onChangeEditar,disable=false})=
     return (
         <FormGroup controlId="formLabelTextArea">
             <Col md={2} mdOffset={2}>
-                <ControlLabel>{texto}</ControlLabel>
+                <ControlLabel >{texto}</ControlLabel>
             </Col>
             <Col md={5}>
-                <FormControl componentClass="textarea" disabled={disable} value={value} onChange={handleChange} />
+                <FormControl componentClass="textarea" disabled={disable} value={value} onChange={handleChange} className="hhh"/>
             </Col>
         </FormGroup>
     );

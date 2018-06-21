@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './Imagenes/LOGO.jpg'
 import './UsuarioVentana.css'
 import './componentsApp/CssComponents/ModalResponsive.css'
+import './componentsApp/CssComponents/Excel.css'
 import {Button,Tab, Tabs,Alert} from 'react-bootstrap'
 import {Row,Grid} from 'react-bootstrap'
 import Modal from 'react-responsive-modal'
@@ -216,7 +217,7 @@ class UsuarioVentana extends Component {
                 </header>
                 <Grid>
                     <Row className="row_boton_cerrar_sesion">
-                        <Button bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesion</Button>
+                        <Button className="btn_cerrar_sesion" bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesión</Button>
                     </Row>
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
                                 valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.metricas}
