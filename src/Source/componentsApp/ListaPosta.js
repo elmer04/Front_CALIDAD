@@ -10,7 +10,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
                         listaChange,listaMetricaChange,buscarPorChange,buscarPorClick,buscarTextChange,
                         OrdenChange,eessClick}) =>
 <Grid>
-    <Panel bsStyle="primary">
+    <Panel bsStyle="primary" className="panel_p">
         <Panel.Heading>Buscar Por : </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
@@ -19,11 +19,11 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
             </Row>
         </Panel.Body>
     </Panel>
-    <Panel bsStyle="primary">
+    <Panel bsStyle="primary" className="panel_p">
         <Panel.Heading>Listar Por : </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">
-                <LabelBox texto="Metricas" valoresBox={valoresBox2} onChangeBox={listaMetricaChange} nombreId="diminutivo"/>
+                <LabelBox texto="Métricas" valoresBox={valoresBox2} onChangeBox={listaMetricaChange}/>
             </Row>
             <Row className="show-grid">
                 <LabelRadioButton texto="Niveles" valoresButton={valoresButton1} changeRadio={listaChange}/>
@@ -31,7 +31,7 @@ const ListaPosta = ({eess,filtroResultado,valoresBox1,valoresBox2,valoresButton1
             </Row>
         </Panel.Body>
     </Panel>
-    <Panel bsStyle="primary">
+    <Panel bsStyle="primary" className="panel_p">
         <Panel.Heading>RESULTADO </Panel.Heading>
         <Panel.Body>
             <Row className="show-grid">

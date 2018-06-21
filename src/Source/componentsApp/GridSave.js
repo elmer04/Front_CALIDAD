@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDataGrid from 'react-data-grid';
+import "./CssComponents/Excel.css";
 
 //rows=[{total: 100, sis: 75, pct: 75}],columns=[{key:'total', name:'Total'},
 //     {key:'sis', name:'SIS'},

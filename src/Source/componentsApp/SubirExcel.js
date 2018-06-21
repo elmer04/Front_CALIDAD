@@ -6,7 +6,7 @@ import { Grid,Col } from 'react-bootstrap'
 const SubirExcel = ({rawData,metricas,postMes,parse}) =>
 <div>
     <Grid>
-        <Panel bsStyle="primary">
+        <Panel bsStyle="primary" className="panel_p">
             <Panel.Heading>Excel </Panel.Heading>
             <Panel.Body>
                 <Col>

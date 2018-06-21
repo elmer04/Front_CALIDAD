@@ -265,7 +265,7 @@
         }
       ]
   ],
-  "BoxBuscar":["Codigo","Nombre"],
+  "BoxBuscar":["Código","Nombre"],
   "BoxNiveles":[
     {
       "nombre":"rojo",
