@@ -31,10 +31,10 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
         <Row>
             <Col md={6} id="Paneles">
                 <Panel bsStyle="primary" className="panel_p">
-                    <Panel.Heading>Descripcion General</Panel.Heading>
+                    <Panel.Heading>Descripción General</Panel.Heading>
                     <Panel.Body>
                         <Row>
-                            <LabelText texto={"Tipo"} value={posta.tipo} disable={true} />
+                            <LabelText texto={"Código"} value={posta.renaes} disable={true} />
                         </Row>
                         <br/>
                         <Row>

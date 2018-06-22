@@ -39,6 +39,7 @@ class UsuarioVentana extends Component {
             niveles: dataInitial.Niveles,
             notas:[],
             fechas:[],
+            eessList:dataInitial.eessList,
             max_min : true,
             openModal : false,
             sesion:true,
@@ -62,15 +63,17 @@ class UsuarioVentana extends Component {
         })
         api.get(`usuario/getUser/${this.state.idUsuario}`).then( resUser => {
             this.setState({user: resUser.data})
-            api.get(`eess/eessMetricaColor/${resUser.data.diris.iddiris}/1`).then(resEess =>{
+            api.get(`eess/api/${resUser.data.diris.iddiris}`).then(resEess =>{
                 this.setState({
-                    eess: resEess.data
+                    eessList: resEess.data,
+                    eess:resEess.data
                 })
             })
         })
         api.get('datosmetricas/fechas').then(res=>{
             this.setState({fechas:res.data})
         })
+
     }
 
 //FUNCIONE STEVE
@@ -111,12 +114,19 @@ class UsuarioVentana extends Component {
     }
 
     buscarPorClick=()=>{
+
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
-                this.buscarPorRenaes(this.state.buscarText)
+                //this.buscarPorRenaes(this.state.buscarText)
+                this.setState(prevState=>({
+                    eess : prevState.eessList.filter(obj=>(obj.renaes).toString().includes(this.state.buscarText))
+                }))
                 break;
             case dataInitial.BoxBuscar[1]:
-                this.buscarPorNombre(this.state.buscarText)
+                //this.buscarPorNombre(this.state.buscarText)
+                this.setState(prevState=>({
+                    eess : prevState.eessList.filter(obj=>obj.nombre.includes(this.state.buscarText.toUpperCase()))
+                }))
         }
     }
 
@@ -131,6 +141,7 @@ class UsuarioVentana extends Component {
                 //console.log('estoy en listar 2');
                 api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
                     this.setState({eess: res.data})
+                    console.log(res.data)
                 })
             }
         else{
