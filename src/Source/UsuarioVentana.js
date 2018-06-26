@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import logo from './Imagenes/LOGO.jpg'
 import './UsuarioVentana.css'
 import './componentsApp/CssComponents/ModalResponsive.css'
-import {Button,Tab, Tabs,Alert} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import {Row,Grid} from 'react-bootstrap'
 import Modal from 'react-responsive-modal'
 import dataInitial from './JsonInitial/initialState'
@@ -10,10 +10,14 @@ import api from './ComponentsSpecials/api'
 import ListaPosta from "./componentsApp/ListaPosta"
 import DescripcionPosta from "./componentsApp/DescripcionPosta"
 import App from "../App.js"
-import Login from "./Login";
-import GridSave from "./componentsApp/GridSave";
-import Notes from "./componentsApp/Notes";
+import swal from 'sweetalert2';
 
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 1500
+});
 
 class UsuarioVentana extends Component {
     constructor(...props){
@@ -51,11 +55,10 @@ class UsuarioVentana extends Component {
         //RECUPERAR LAS METRICAS
         api.get('datosmetricas/metricas').then( resMetrica => {
             let metricas=resMetrica.data.slice();
-            console.log(metricas)
             metricas.push({
-                    idindicador:0,
-                    diminutivo:"Promedio",
-                }
+                        idindicador:0,
+                        diminutivo:"Promedio",
+                    }
                 )
             this.setState({metricas: resMetrica.data,BoxMetricas:metricas})
         })
@@ -112,7 +115,7 @@ class UsuarioVentana extends Component {
     buscarPorClick=()=>{
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
-                this.buscarPorRenaes(this.state.buscarText)
+                //this.buscarPorRenaes(this.state.buscarText)
                 break;
             case dataInitial.BoxBuscar[1]:
                 this.buscarPorNombre(this.state.buscarText)
