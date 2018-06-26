@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './Imagenes/LOGO.jpg'
 import './UsuarioVentana.css'
 import './componentsApp/CssComponents/ModalResponsive.css'
+import './componentsApp/CssComponents/Excel.css'
 import {Button} from 'react-bootstrap'
 import {Row,Grid} from 'react-bootstrap'
 import Modal from 'react-responsive-modal'
@@ -42,6 +43,7 @@ class UsuarioVentana extends Component {
             niveles: dataInitial.Niveles,
             notas:[],
             fechas:[],
+            eessList:dataInitial.eessList,
             max_min : true,
             openModal : false,
             sesion:true,
@@ -64,15 +66,17 @@ class UsuarioVentana extends Component {
         })
         api.get(`usuario/getUser/${this.state.idUsuario}`).then( resUser => {
             this.setState({user: resUser.data})
-            api.get(`eess/eessMetricaColor/${resUser.data.diris.iddiris}/1`).then(resEess =>{
+            api.get(`eess/api/${resUser.data.diris.iddiris}`).then(resEess =>{
                 this.setState({
-                    eess: resEess.data
+                    eessList: resEess.data,
+                    eess:resEess.data
                 })
             })
         })
         api.get('datosmetricas/fechas').then(res=>{
             this.setState({fechas:res.data})
         })
+
     }
 
 //FUNCIONE STEVE
@@ -113,12 +117,19 @@ class UsuarioVentana extends Component {
     }
 
     buscarPorClick=()=>{
+
         switch(this.state.buscarPor){
             case dataInitial.BoxBuscar[0]:
                 //this.buscarPorRenaes(this.state.buscarText)
+                this.setState(prevState=>({
+                    eess : prevState.eessList.filter(obj=>(obj.renaes).toString().includes(this.state.buscarText))
+                }))
                 break;
             case dataInitial.BoxBuscar[1]:
-                this.buscarPorNombre(this.state.buscarText)
+                //this.buscarPorNombre(this.state.buscarText)
+                this.setState(prevState=>({
+                    eess : prevState.eessList.filter(obj=>obj.nombre.includes(this.state.buscarText.toUpperCase()))
+                }))
         }
     }
 
@@ -246,7 +257,7 @@ class UsuarioVentana extends Component {
                 </header>
                 <Grid>
                     <Row className="row_boton_cerrar_sesion">
-                        <Button bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesion</Button>
+                        <Button className="btn_cerrar_sesion" bsStyle="primary" type="submit" onClick={this.cerrarSesion} >Cerrar Sesión</Button>
                     </Row>
                     <ListaPosta eess={this.state.eess} filtroResultado={this.state.filtroResultado}
                                 valoresBox1={this.state.BoxBuscar} valoresBox2={this.state.BoxMetricas}

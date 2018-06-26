@@ -57,6 +57,53 @@
       "porcentaje":67.30
     }
   ],
+  "eessLista":[
+    {
+      "ideess": 96,
+      "nombre": "C.S.M.I. ANCON",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005814",
+      "diris_iddiris": 1
+    },
+    {
+      "ideess": 97,
+      "nombre": "C.S. VILLA ESTELA",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005823",
+      "diris_iddiris": 1
+    },
+    {
+      "ideess": 98,
+      "nombre": "P.S. SAN JOSE",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005824",
+      "diris_iddiris": 1
+    },
+    {
+      "ideess": 99,
+      "nombre": "P.S. VILLAS DE ANCON",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000016525",
+      "diris_iddiris": 1
+    },
+    {
+      "ideess": 100,
+      "nombre": "C.S. RAUL PORRAS BARRENECHEA",
+      "tipo": "1",
+      "gerente": "Steve",
+      "direccion": "Mi casa",
+      "renaes": "000005734",
+      "diris_iddiris": 1
+    }
+  ],
   "rawdataInitial":[
         [
           {
@@ -265,22 +312,22 @@
         }
       ]
   ],
-  "BoxBuscar":["Codigo","Nombre"],
+  "BoxBuscar":["Código","Nombre"],
   "BoxNiveles":[
     {
-      "nombre":"rojo",
+      "nombre":"Rojo",
       "color":"#ff3300"
     },
     {
-      "nombre":"amarillo",
+      "nombre":"Amarillo",
       "color":"#ffff66"
     },
     {
-      "nombre":"verde",
+      "nombre":"Verde",
       "color":"#66ff66"
     },
     {
-      "nombre":"total",
+      "nombre":"Total",
       "color":""
     }
   ],

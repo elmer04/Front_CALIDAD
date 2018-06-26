@@ -16,7 +16,7 @@ const RegistroMetricas = ({texto,valores,editable,onClickEditar,onClickGuardar,c
                     valores.map((valor,index)=>{
                         return  <Row key={index}className="row_p">
                                     <LabelTextArea onChangeEditar={changeEditar} index={index}
-                                                   texto={"Metrica "+(index+1)} value={valor.nombre}  disable={!editable}/>
+                                                   texto={"Métrica "+(index+1)} value={valor.nombre}  disable={!editable}/>
                                 </Row>
 
                         }

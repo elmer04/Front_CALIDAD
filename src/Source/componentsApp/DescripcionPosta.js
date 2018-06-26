@@ -30,11 +30,11 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
         </Row>
         <Row>
             <Col md={6} id="Paneles">
-                <Panel bsStyle="primary">
-                    <Panel.Heading>Descripcion General</Panel.Heading>
+                <Panel bsStyle="primary" className="panel_p">
+                    <Panel.Heading>Descripción General</Panel.Heading>
                     <Panel.Body>
                         <Row>
-                            <LabelText texto={"Tipo"} value={posta.tipo} disable={true} />
+                            <LabelText texto={"Código"} value={posta.renaes} disable={true} />
                         </Row>
                         <br/>
                         <Row>
@@ -42,7 +42,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
                         </Row>
                     </Panel.Body>
                 </Panel>
-                <Panel bsStyle="primary">
+                <Panel bsStyle="primary" className="panel_p">
                     <Panel.Heading>Ubicación</Panel.Heading>
                     <Panel.Body>
                         {
@@ -60,14 +60,14 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
                 </Panel>
             </Col>
             <Col md={6}>
-                <Panel bsStyle="primary">
+                <Panel bsStyle="primary" className="panel_p">
                     <Panel.Heading>Fecha</Panel.Heading>
                     <Panel.Body>
                         <LabelBox texto="Fecha" mdBoxOffset={2} valoresBox={fechas}
                                   valueId={"idfecha"} nombreId={"fecha"} onChangeBox={onChangeFecha}/>
                     </Panel.Body>
                 </Panel>
-                <Panel bsStyle="primary">
+                <Panel bsStyle="primary" className="panel_p">
                     <Panel.Heading>Métricas</Panel.Heading>
                     <Panel.Body>
                         {
@@ -82,7 +82,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
                         }
                     </Panel.Body>
                 </Panel>
-                <Panel bsStyle="primary">
+                <Panel bsStyle="primary" className="panel_p">
                     <Panel.Heading>Promedio Métrica</Panel.Heading>
                     <Panel.Body>
                         <LabelLabels texto="Promedio" valoresLabels={colores} color={posta.color}/>
@@ -92,7 +92,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
         </Row>
         <Row>
             <Col>
-                <Panel bsStyle="primary">
+                <Panel bsStyle="primary" className="panel_p">
                     <Panel.Heading>Diagrama de Pareto</Panel.Heading>
                     <Panel.Body>
                         {paretoCambio?null:<ParetoDiagram data={convertir_data(posta.metricas)} size={[400,400]} />}
@@ -102,7 +102,7 @@ const DescripcionPosta = ({posta,metricas,colores,notas,onChangeNotas,fechas,onC
         </Row>
         <Row>
             <Col>
-                <Panel bsStyle="primary">
+                <Panel bsStyle="primary" className="panel_p">
                     <Panel.Heading>Notas</Panel.Heading>
                     <Panel.Body>
                         {notasCambio?null:<Notes notes={notas} onChangeNotes={onChangeNotas}/>}

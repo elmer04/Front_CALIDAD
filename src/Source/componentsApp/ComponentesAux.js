@@ -73,7 +73,7 @@ export const LabelRadioButton= ({texto,valoresButton,changeRadio}) => {
                         {
                             valoresButton.map((valor,key) => {
                                 return <Radio name="radioGroup1" onChange={handleOptionChange}
-                                                  className="radios" value={valor.nombre} key={key}>{valor.nombre}</Radio>
+                                                  className="radios" value={valor.nombre.toLowerCase()} key={key}>{valor.nombre}</Radio>
 
                             })
                         }
@@ -94,10 +94,10 @@ export const LabelTextArea = ({texto,value,index,onChangeEditar,disable=false})=
     return (
         <FormGroup controlId="formLabelTextArea">
             <Col md={2} mdOffset={2}>
-                <ControlLabel>{texto}</ControlLabel>
+                <ControlLabel >{texto}</ControlLabel>
             </Col>
             <Col md={5}>
-                <FormControl componentClass="textarea" disabled={disable} value={value} onChange={handleChange} />
+                <FormControl componentClass="textarea" disabled={disable} value={value} onChange={handleChange} className="hhh"/>
             </Col>
         </FormGroup>
     );
@@ -178,6 +178,7 @@ export const LabelLabels = ({texto,color,valoresLabels})=>{
                         return  <Col className="labelLabelsdiv" md={md} key={key}>
                                     <Label className="div_labels" >{valor.nombre}</Label>
                                 </Col>
+                        /*return <div key={key}></div>*/
                     })
                 }
             </Col>
