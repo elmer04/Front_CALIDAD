@@ -7,28 +7,48 @@ import XLSX from 'xlsx'
 import dataInitial from './JsonInitial/initialState'
 import api from './ComponentsSpecials/api'
 import App from "../App.js"
+import swal from "sweetalert2"
 import SubirExcel from "./componentsApp/SubirExcel"
 import RegistroMetricas from "./componentsApp/RegistroMetricas"
+import './cssExternal/animate.css'
+
+const toastSesion=swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 1500,
+    type : 'success',
+    title :'SESIÓN CERRADA CON ÉXITO'
+});
+
+
+const guardarMetricas=swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 1500,
+    type : 'success',
+    title :'MÉTRICAS GUARDADAS CON ÉXITO'
+});
+
+/*
+swal({
+    title: 'EXCEL SUBIDO CON EXITO',
+    showConfirmButton: false,
+    animation:false,
+    timer: 1500,
+    type:'success',
+    customClass: 'animated bounceIn',
+})
+*/
 
 class AdministradorVentana extends Component {
   constructor(...props){
       super(...props)
       this.state = {
-          //view: 1,
           metricas:dataInitial.valoresMetricas,
-          //eess: dataInitial.eess,
           rawData: dataInitial.rawdataInitial,
-          //BoxBuscar: dataInitial.BoxBuscar,
-          //BoxNiveles:  dataInitial.BoxNiveles,
-          //filtroResultado:dataInitial.filtroResultado,
           metricaEnable: false,
-          //buscarPor:dataInitial.BoxBuscar[0],
-          //buscarText:'',
-          //selectListar : '',
-          //selectMetricaListar : 1,
-          //posta : dataInitial.posta,
-          //niveles: dataInitial.Niveles,
-          //max_min : true,
           sesion:true,
       }
 
@@ -73,39 +93,21 @@ class AdministradorVentana extends Component {
     }
 
     saveChanges=()=>{
-        api.post(`datosmetricas/metricasUpdate`,this.state.metricas).then(
+        api.post(`datosmetricas/metricasUpdate`,this.state.metricas).then(res=>{
                 this.setState(prevState=>({
                     metricaEnable: !prevState.metricaEnable
-                }))
-            )
+                }));
+                guardarMetricas({});
+            })
     }
 
 
 
 //CAMBIOS ALEJANDRO
-  /*changeView = () => {
-      if (this.state.view===2){
-          this.setState(prevState => ({
-              view:1
-          }))
-      }else{
-          api.get('eess/api').then(res =>{
-              this.setState(prevState => ({
-                  eess: res.data,
-                  view: 2
-              }))
-          })
-
-
-      }
-
-  }
-*/
   postMes = (key) => {
       console.log(key);
       api.post(`datosmetricas/api/${key}`,this.state.rawData[key-1]).then( res =>{
           api.get(`datosmetricas/ponerColor/${key}`).then(
-
           )
           }
       )
@@ -276,13 +278,16 @@ class AdministradorVentana extends Component {
           };
           if(rABS) reader.readAsBinaryString(f); else reader.readAsArrayBuffer(f);
 
-      }
 
-      return handleFile(XLSXObject)
+
+      }
+      handleFile(XLSXObject)
+
   }
 
   cerrarSesion=()=>{
-      this.setState({sesion:false})
+      this.setState({sesion:false});
+      toastSesion({});
   }
 
 

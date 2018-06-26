@@ -13,11 +13,31 @@ import DescripcionPosta from "./componentsApp/DescripcionPosta"
 import App from "../App.js"
 import swal from 'sweetalert2';
 
-const toast = swal.mixin({
+const toastListar = swal.mixin({
     toast: true,
     position: 'top-start',
     showConfirmButton: false,
-    timer: 1500
+    timer: 1500,
+    type : 'success',
+    title :'BÚSQUEDA EXITOSA'
+});
+
+const toastNivel = swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 1500,
+    type : 'warning',
+    title :'ESCOJA NIVEL'
+});
+
+const toastSesion=swal.mixin({
+    toast: true,
+    position: 'top-start',
+    showConfirmButton: false,
+    timer: 1500,
+    type : 'success',
+    title :'SESIÓN CERRADA CON ÉXITO'
 });
 
 class UsuarioVentana extends Component {
@@ -60,6 +80,7 @@ class UsuarioVentana extends Component {
             metricas.push({
                         idindicador:0,
                         diminutivo:"Promedio",
+                        nombre:"PROMEDIO",
                     }
                 )
             this.setState({metricas: resMetrica.data,BoxMetricas:metricas})
@@ -139,12 +160,16 @@ class UsuarioVentana extends Component {
                 //console.log('estoy en lista 1');
                 api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}`).then(res => {
                     this.setState({eess: res.data})
+                    toastListar({});
                 })
             }else {
-                //console.log('estoy en listar 2');
-                api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
-                    this.setState({eess: res.data})
-                })
+                if(this.state.selectListar!=='')
+                    api.get(`eess/eessMetricaColor/${this.state.user.diris.iddiris}/${this.state.selectMetricaListar}/${this.state.selectListar}`).then(res => {
+                        this.setState({eess: res.data})
+                        toastListar({});
+                    })
+                else
+                    toastNivel({});
             }
         else{
             if(this.state.selectListar=='total') {
@@ -153,14 +178,18 @@ class UsuarioVentana extends Component {
                 api.get(`eess/eessPromedioColor/${this.state.user.diris.iddiris}`).then(res => {
                     console.log(res.data)
                     this.setState({eess: res.data})
+                    toastListar({});
                 })
             }else {
-                api.get(`eess/eessPromedioColor/${this.state.user.diris.iddiris}/${this.state.selectListar}`).then(res => {
-                    this.setState({eess: res.data})
-                })
+                if(this.state.selectListar!=='')
+                    api.get(`eess/eessPromedioColor/${this.state.user.diris.iddiris}/${this.state.selectListar}`).then(res => {
+                        this.setState({eess: res.data})
+                        toastListar({});
+                    })
+                else
+                    toastNivel({});
             }
         }
-
     }
 
     handleBuscarChange=(buscarPor) => {
@@ -223,7 +252,8 @@ class UsuarioVentana extends Component {
     }
 
     cerrarSesion=()=>{
-        this.setState({sesion:false})
+        this.setState({sesion:false});
+        toastSesion({});
     }
 
     changeMesYear=(idfecha)=>{
