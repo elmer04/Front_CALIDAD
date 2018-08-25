@@ -281,7 +281,7 @@ class AdministradorVentana extends Component {
 
 
       }
-      handleFile(XLSXObject)
+      return handleFile(XLSXObject)
 
   }
 
